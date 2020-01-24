@@ -1,0 +1,57 @@
+@import '../../vars';
+.start {
+  height: 98vh;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-image: url('https://homes-images.s3.eu-west-2.amazonaws.com/bg-hero.jpg');
+    background-position: center;
+    background-size: cover;
+  }
+
+  &__welcome {
+    width: 50%;
+    margin: 0 auto;
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(7, 1, 1, 0.5);
+    color: whitesmoke;
+    padding: 8rem 4rem;
+  }
+
+  &__heading {
+    text-align: center;
+    font-size: 4.4rem;
+    font-weight: 400;
+  }
+
+  &__link {
+    display: block;
+    width: 30rem;
+    margin: 2rem auto;
+    margin-top: 8rem;
+    text-decoration: none;
+    text-align: center;
+    font-size: 2.6rem;
+    padding: 1rem;
+    color: $color-font-dark;
+    background-color: $color-font-gold;
+    border-radius: 10px;
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s;
+  }
+
+  &__link:hover {
+    background-color: rgb(209, 181, 110);
+  }
+}

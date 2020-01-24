@@ -1,0 +1,6 @@
+*BUCKET_ARN  = arn:aws:s3:::homes-images
+
+
+// photo link:
+
+https://s3.eu-west-2.amazonaws.com/homes-images/m3.jpg

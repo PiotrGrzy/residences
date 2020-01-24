@@ -1,0 +1,45 @@
+@import '../vars';
+
+.addhome {
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__form {
+    width: 60vw;
+    max-width: 100rem;
+    display: flex;
+    flex-direction: column;
+    padding: 6rem;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  &__input,
+  &__label,
+  &__btn {
+    font-size: 1.8rem;
+    color: $color-font-gold;
+  }
+
+  &__input {
+    border: none;
+    border-bottom: 1px solid $color-font-gold;
+    background-color: whitesmoke;
+    margin: 1rem 0;
+  }
+
+  &__description {
+    border: none;
+    font-size: 1.6rem;
+    font-family: inherit;
+  }
+
+  &__btn {
+    cursor: pointer;
+    padding: 1rem;
+    border: none;
+  }
+}

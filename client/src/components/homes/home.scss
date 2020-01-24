@@ -1,0 +1,84 @@
+@import '../vars';
+
+.home {
+  background-color: white;
+  text-decoration: none;
+  display: flex;
+  padding: 1rem;
+  max-height: 40rem;
+  max-width: 100rem;
+  margin: 3rem auto;
+  border-radius: 10px;
+  box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.2);
+
+  &:hover .home__img {
+    transform: scale(1.1);
+  }
+  &__img-box {
+    flex: 5;
+    overflow: hidden;
+  }
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+  }
+
+  &__data {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    padding: 1rem 2rem;
+    color: $color-font-dark;
+  }
+  &__title {
+    font-size: 3.2rem;
+    color: $color-font-gold;
+    font-weight: 300;
+    font-family: 'Georgia', 'Times New Roman', Times, serif;
+  }
+
+  &__price {
+    padding: 2rem 4rem;
+    border: 1px solid $color-font-gold;
+    margin: 0 auto;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+  &__location {
+    margin: 0 auto;
+    font-size: 1.8rem;
+  }
+
+  &__grid {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  &__rooms,
+  &__area,
+  &__floor,
+  &__build {
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 1.6rem;
+    color: $color-font-dark;
+
+    span {
+      color: $color-font-gold;
+    }
+  }
+  &__details {
+    font-size: 2.4rem;
+    color: $color-font-gold;
+  }
+  &__date {
+    margin-left: auto;
+  }
+}

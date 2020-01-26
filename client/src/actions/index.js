@@ -48,19 +48,12 @@ export const registerUser = formData => async dispatch => {
   } catch (err) {
     console.log(err);
   }
-  // var myHeaders = new Headers();
-  // myHeaders.append('Content-Type', 'application/json');
+};
 
-  // var raw = JSON.stringify(formData);
-
-  // var requestOptions = {
-  //   method: 'POST',
-  //   headers: myHeaders,
-  //   body: raw
-  // };
-
-  // fetch('127.0.0.1:5000/api/users', requestOptions)
-  //   .then(response => response.text())
-  //   .then(result => console.log(result))
-  //   .catch(error => console.log('error', error));
+export const addHome = formData => async dispatch => {
+  try {
+    console.log(formData);
+  } catch (err) {
+    console.log(err);
+  }
 };

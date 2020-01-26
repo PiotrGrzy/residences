@@ -4,6 +4,8 @@ import './home.scss';
 const Home = ({
   home: { _id, images, title, rooms, area, price, location, date, build, floor }
 }) => {
+  const dateDisplay = date.slice(0, 10);
+
   return (
     <li>
       <Link className="home" to={`homes/${_id}`}>
@@ -39,7 +41,7 @@ const Home = ({
             </p>
           </div>
           <p className="home__date">
-            <span>Added: </span> {date}
+            <span>Added: </span> {dateDisplay}
           </p>
         </div>
       </Link>

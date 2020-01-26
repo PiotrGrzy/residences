@@ -1,84 +1,198 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { useForm } from 'react-hook-form';
+
+import { addHome } from '../../actions';
 
 import './add-home.scss';
 
-const AddHome = () => {
+const AddHome = props => {
+  const defaultValues = {
+    title: '',
+    country: 'Poland',
+    city: '',
+    street: '',
+    rooms: '',
+    area: '',
+    floor: '',
+    price: '',
+    description: ''
+  };
+
+  const { register, handleSubmit, watch, errors, reset } = useForm({
+    defaultValues
+  });
+
+  const onSubmit = data => {
+    if (props.user.isSignedIn) {
+      const newHomeData = {
+        data: data,
+        user: props.user
+      };
+      props.addHome(newHomeData);
+    } else {
+      alert('U must be signed in to add new residence');
+    }
+  };
+
   return (
     <div className="addhome">
-      <form action="" className="addhome__form">
+      <form className="addhome__form" onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="title" className="addhome__label">
           Name:
         </label>
-        <input
-          type="text"
-          required
-          className="addhome__input"
-          id="title"
-          name="title"
-        />
-        <label htmlFor="phone" className="addhome__label">
+        <div className="input-wrapper">
+          <input
+            type="text"
+            className="addhome__input"
+            id="title"
+            name="title"
+            ref={register({ required: true, minLength: 6 })}
+          />
+          {errors.name && (
+            <span className="form-error-info">
+              Title is required, it must be at least 6chars long.
+            </span>
+          )}
+        </div>
+
+        <label htmlFor="country" className="addhome__label">
           Country:
         </label>
-        <input
-          type="text"
-          required
-          className="addhome__input"
-          id="contry"
-          name="contry"
-          value="Poland"
-        />
+        <div className="input-wrapper">
+          <input
+            type="text"
+            className="addhome__input"
+            id="country"
+            name="country"
+            ref={register({ required: true })}
+          />
+          {errors.country && (
+            <span className="form-error-info">Country is required</span>
+          )}
+        </div>
+
         <label htmlFor="city" className="addhome__label">
           City:
         </label>
-        <input
-          type="city"
-          required
-          className="addhome__input"
-          id="city"
-          name="city"
-        />
+        <div className="input-wrapper">
+          <input
+            type="text"
+            className="addhome__input"
+            id="city"
+            name="city"
+            ref={register({ required: true })}
+          />
+          {errors.city && (
+            <span className="form-error-info">City is required</span>
+          )}
+        </div>
+
         <label htmlFor="street" className="addhome__label">
           Street:
         </label>
-        <input
-          type="street"
-          required
-          className="addhome__input"
-          id="street"
-          name="street"
-        />
+        <div className="input-wrapper">
+          <input
+            type="text"
+            className="addhome__input"
+            id="street"
+            name="street"
+            ref={register}
+          />
+        </div>
 
         <label htmlFor="rooms" className="addhome__label">
           Rooms:
         </label>
-        <input
-          type="rooms"
-          required
-          className="addhome__input"
-          id="rooms"
-          name="rooms"
-        />
+        <div className="input-wrapper">
+          <input
+            type="text"
+            className="addhome__input"
+            id="rooms"
+            name="rooms"
+            ref={register({
+              required: true,
+              pattern: /^([0-9]|[1-9][0-9]|100)$/
+            })}
+          />
+          {errors.rooms && (
+            <span className="form-error-info">Number of rooms is required</span>
+          )}
+        </div>
 
         <label htmlFor="area" className="addhome__label">
           Area:
         </label>
-        <input
-          type="area"
-          required
-          className="addhome__input"
-          id="area"
-          name="area"
-        />
+        <div className="input-wrapper">
+          <input
+            type="text"
+            className="addhome__input"
+            id="area"
+            name="area"
+            ref={register({
+              required: true,
+              pattern: /^\d+$/
+            })}
+          />
+          {errors.area && (
+            <span className="form-error-info">
+              Area of the residence is required
+            </span>
+          )}
+        </div>
 
         <label htmlFor="floor" className="addhome__label">
           floor:
         </label>
+        <div className="input-wrapper">
+          <input
+            type="text"
+            className="addhome__input"
+            id="floor"
+            name="floor"
+            ref={register({
+              required: true,
+              pattern: /^\d+$/
+            })}
+          />
+          {errors.floor && (
+            <span className="form-error-info">
+              Floor of the residence is required
+            </span>
+          )}
+        </div>
+
+        <label htmlFor="price" className="addhome__label">
+          Price:
+        </label>
+        <div className="input-wrapper">
+          <input
+            type="text"
+            className="addhome__input"
+            id="price"
+            name="price"
+            ref={register({
+              required: true,
+              pattern: /^\d+$/
+            })}
+          />
+          {errors.price && (
+            <span className="form-error-info">
+              Price of the residence is required
+            </span>
+          )}
+        </div>
+
+        <label htmlFor="images" className="addhome__label">
+          Add some residence photos:
+        </label>
         <input
-          type="floor"
-          required
           className="addhome__input"
-          id="floor"
-          name="floor"
+          type="file"
+          name="images"
+          id="images"
+          multiple
+          ref={register}
         />
         <textarea
           name="description"
@@ -87,6 +201,7 @@ const AddHome = () => {
           rows="10"
           placeholder="description"
           className="addhome__description"
+          ref={register}
         ></textarea>
 
         <button className="addhome__btn" type="submit">
@@ -97,4 +212,10 @@ const AddHome = () => {
   );
 };
 
-export default AddHome;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+export default connect(mapStateToProps, { addHome })(AddHome);

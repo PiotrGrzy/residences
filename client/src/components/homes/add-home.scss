@@ -1,16 +1,18 @@
 @import '../vars';
 
 .addhome {
-  margin-top: 4rem;
+  margin: 4rem 0;
   display: flex;
   justify-content: center;
   align-items: center;
 
   &__form {
-    width: 60vw;
+    //width: 60vw;
     max-width: 100rem;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    justify-items: end;
     padding: 6rem;
     background-color: whitesmoke;
     border-radius: 10px;
@@ -29,17 +31,33 @@
     border-bottom: 1px solid $color-font-gold;
     background-color: whitesmoke;
     margin: 1rem 0;
+    width: 100%;
+    color: $color-font-dark;
+    font-family: inherit;
+    font-weight: 300;
   }
 
   &__description {
     border: none;
     font-size: 1.6rem;
     font-family: inherit;
+    grid-column: 1/-1;
+    justify-self: normal;
   }
 
   &__btn {
     cursor: pointer;
     padding: 1rem;
     border: none;
+    grid-column: 1/-1;
+    justify-self: normal;
+    background-color: $color-font-gold;
+    color: whitesmoke;
+    opacity: .5;
+    transition: opacity .2;
+  }
+
+  &__btn:hover {
+    opacity: 1;
   }
 }

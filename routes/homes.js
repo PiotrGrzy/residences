@@ -52,9 +52,9 @@ router.post(
   ],
   async (req, res) => {
     //console.log(req.body);
-    const imagesUpload = upload.array('images', 6);
 
     try {
+      const imagesUpload = upload.array('images', 8);
       let home = '';
       await imagesUpload(req, res, async function(err) {
         //console.log(req.body);
@@ -97,6 +97,7 @@ router.post(
       });
     } catch (err) {
       console.log(err);
+      res.status(400).json({ msg: err });
     }
   }
 );

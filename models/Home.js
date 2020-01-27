@@ -12,7 +12,10 @@ const HomeSchema = mongoose.Schema({
   //     ref: 'users'
   //   },
   owner: {
-    type: String
+    id: { type: mongoose.Schema.Types.ObjectId, required: true },
+    name: { type: String, required: true },
+    phone: { type: String, required: true },
+    email: { type: String, required: true }
   },
   title: {
     type: String,

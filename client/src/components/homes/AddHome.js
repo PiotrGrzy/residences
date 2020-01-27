@@ -16,7 +16,8 @@ const AddHome = props => {
     area: '',
     floor: '',
     price: '',
-    description: ''
+    description: '',
+    build: ''
   };
 
   const { register, handleSubmit, watch, errors, reset } = useForm({
@@ -26,8 +27,8 @@ const AddHome = props => {
   const onSubmit = data => {
     if (props.user.isSignedIn) {
       const newHomeData = {
-        data: data,
-        user: props.user
+        ...data,
+        owner: { ...props.user }
       };
       props.addHome(newHomeData);
     } else {

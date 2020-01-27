@@ -24,8 +24,13 @@ mongoose
     console.log('DB connection succesfull!');
   });
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+    limit: '10mb'
+  })
+);
 app.use(cors());
 
 app.use('/api/homes', homes);

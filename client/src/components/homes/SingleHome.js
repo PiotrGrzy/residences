@@ -74,15 +74,15 @@ const SingleHome = props => {
           <div className="single__owner">
             <h3 className="single__sub-heading">Contact to this offer: </h3>
             <p className="single__owner-name">
-              <i className="lni-emoji-smile"></i> Owner: {owner}
+              <i className="lni-emoji-smile"></i> Owner: {owner.name}
             </p>
             <p className="single__owner-phone">
               {' '}
-              <i className="lni-phone-handset"></i> Phone: 666-999-666
+              <i className="lni-phone-handset"></i> Phone: {owner.phone}
             </p>
             <div className="single__owner-email">
               {' '}
-              <i className="lni-envelope"></i> email: test@test.com
+              <i className="lni-envelope"></i> email: {owner.email}
             </div>
           </div>
 

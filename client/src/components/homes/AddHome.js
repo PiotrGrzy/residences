@@ -163,6 +163,27 @@ const AddHome = props => {
           )}
         </div>
 
+        <label htmlFor="build" className="addhome__label">
+          Build:
+        </label>
+        <div className="input-wrapper">
+          <input
+            type="text"
+            className="addhome__input"
+            id="build"
+            name="build"
+            ref={register({
+              required: true,
+              pattern: /^\d+$/
+            })}
+          />
+          {errors.build && (
+            <span className="form-error-info">
+              build of the residence is required
+            </span>
+          )}
+        </div>
+
         <label htmlFor="price" className="addhome__label">
           Price:
         </label>

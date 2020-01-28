@@ -1,7 +1,21 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-import { FETCH_HOMES, FETCH_SINGLE, LOGIN_USER, REGISTER_USER } from './types';
+import {
+  SET_LOADING,
+  FETCH_HOMES,
+  FETCH_SINGLE,
+  LOGIN_USER,
+  REGISTER_USER,
+  LOGOUT_USER,
+  ADD_HOME
+} from './types';
+
+export const setLoading = () => {
+  return {
+    type: SET_LOADING
+  };
+};
 
 export const fetchHomes = () => async dispatch => {
   const response = await axios.get('http://localhost:5000/api/homes');
@@ -52,6 +66,10 @@ export const registerUser = formData => async dispatch => {
   }
 };
 
+export const logoutUser = () => {
+  return { type: LOGOUT_USER };
+};
+
 export const addHome = data => async dispatch => {
   try {
     console.log(data);
@@ -87,6 +105,7 @@ export const addHome = data => async dispatch => {
     });
 
     console.log(response.data);
+    dispatch({ type: ADD_HOME, payload: response.data });
   } catch (err) {
     console.log(err);
   }

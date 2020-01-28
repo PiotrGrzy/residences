@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { logoutUser } from '../../../actions';
 
 import './navbar.scss';
 
@@ -14,7 +15,9 @@ const NavBar = props => {
             <span>Welcome {props.userName}</span>
           </li>
           <li className="navbar__list-item">
-            <Link>LogOut</Link>
+            <button onClick={props.logoutUser} className="navbar__logout">
+              LogOut <i className="lni-shift-right"></i>
+            </button>
           </li>
         </>
       );
@@ -77,4 +80,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(NavBar);
+export default connect(mapStateToProps, { logoutUser })(NavBar);

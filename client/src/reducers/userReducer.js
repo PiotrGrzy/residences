@@ -1,4 +1,4 @@
-import { LOGIN_USER, REGISTER_USER } from '../actions/types';
+import { LOGIN_USER, REGISTER_USER, LOGOUT_USER } from '../actions/types';
 
 const initialState = {
   isSignedIn: false,
@@ -20,6 +20,9 @@ export default (state = initialState, action) => {
         email,
         phone
       };
+    case LOGOUT_USER: {
+      return initialState;
+    }
 
     default:
       return state;

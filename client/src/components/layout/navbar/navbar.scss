@@ -37,4 +37,18 @@
       color: blue;
     }
   }
+
+  &__logout {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    border: none;
+    font-size: 1.4rem;
+    margin: 0 2rem;
+    font-family: inherit;
+    // color: rgb(124, 49, 49);
+    background-color: rgb(170, 169, 169);
+    padding: 0.5rem;
+    border-radius: 5px;
+  }
 }

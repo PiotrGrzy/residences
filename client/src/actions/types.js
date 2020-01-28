@@ -5,3 +5,6 @@ export const DELETE_HOME = 'DELETE_HOME';
 export const UPDATE_HOME = 'UPDATE_HOME';
 export const LOGIN_USER = 'LOGIN_USER';
 export const REGISTER_USER = 'REGISTER_USER';
+export const LOGOUT_USER = 'LOGOUT_USER';
+
+export const SET_LOADING = 'SET_LOADING';

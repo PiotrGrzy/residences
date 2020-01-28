@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import ImageGallery from 'react-image-gallery';
+import numeral from 'numeral';
 import { connect } from 'react-redux';
 import { fetchSingleHome } from '../../actions';
 
@@ -13,7 +14,6 @@ const SingleHome = props => {
 
   if (props.current.title) {
     const {
-      _id,
       images,
       title,
       rooms,
@@ -26,6 +26,12 @@ const SingleHome = props => {
       owner,
       description
     } = props.current;
+
+    const dateDisplay = date.slice(0, 10);
+    const priceDisplay = numeral(price)
+      .format('0,0,0')
+      .replace(',', ' ');
+
     const galleryItems = images.map(image => {
       const item = {
         original: image,
@@ -39,7 +45,7 @@ const SingleHome = props => {
         <ImageGallery items={galleryItems} />
         <div className="single__details">
           <h2 className="single__title">{title}</h2>
-          <p className="single__price">{price} PLN</p>
+          <p className="single__price">{priceDisplay} PLN</p>
 
           <div className="single__parameters">
             <h3 className="single__sub-heading">Offer details</h3>
@@ -90,6 +96,10 @@ const SingleHome = props => {
             <span className="single__sub-heading">Description: </span>
             {description}
           </p>
+          <p className="single__date">Added: {dateDisplay}</p>
+          <a className="single__goback" onClick={() => props.history.goBack()}>
+            <i className="lni-angle-double-left"></i> Back to results
+          </a>
         </div>
       </div>
     );

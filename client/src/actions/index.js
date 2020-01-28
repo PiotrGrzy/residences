@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 import { FETCH_HOMES, FETCH_SINGLE, LOGIN_USER, REGISTER_USER } from './types';
 
@@ -27,6 +28,8 @@ export const loginUser = formData => async dispatch => {
       data: JSON.stringify(formData),
       headers: { 'Content-Type': 'application/json' }
     });
+
+    Cookies.set('token', response.data.token);
     dispatch({ type: LOGIN_USER, payload: response.data });
   } catch (err) {
     console.log(err);
@@ -35,15 +38,14 @@ export const loginUser = formData => async dispatch => {
 
 export const registerUser = formData => async dispatch => {
   try {
-    console.log(formData);
     const response = await axios({
       method: 'post',
       url: 'http://localhost:5000/api/users',
       data: JSON.stringify(formData),
       headers: { 'Content-Type': 'application/json' }
     });
-    console.log(response.data);
 
+    Cookies.set('token', response.data.token);
     dispatch({ type: REGISTER_USER, payload: response.data });
   } catch (err) {
     console.log(err);
@@ -72,24 +74,14 @@ export const addHome = data => async dispatch => {
     console.log(data.images);
 
     [...data.images].forEach(image => formdata.append('images', image));
-    //formdata.append('images', data.images);
-    // formdata.append(
-    //   'images',
-    //   data.images[0],
-    //   '/C:/Users/Piotr/Downloads/m100.jpg'
-    // );
-
-    //formdata.append('images', data.images);
-
-    //form.append('data', data);
+    const token = Cookies.get('token');
 
     const response = await axios({
       method: 'post',
       url: 'http://localhost:5000/api/homes',
       data: formdata,
       headers: {
-        'x-auth-token':
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWUyODJhMTM1YmU2NjUyMTM4MDAwOGZlIiwibmFtZSI6IlBpb3RyIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwicGhvbmUiOiI5OTktMDAwLTk5OSJ9LCJpYXQiOjE1ODAxMjIyNTAsImV4cCI6MTU4MDE1ODI1MH0.zdmh5NHt4ZjR-u3YrvC433SzQxcIjnWSGTBOgT8z4xs',
+        'x-auth-token': token,
         'Content-Type': 'multipart/form-data'
       }
     });

@@ -1,9 +1,44 @@
-import React, { ReactFragment as Fragment } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './navbar.scss';
 
-const NavBar = () => {
+const NavBar = props => {
+  console.log(props.isSignedIn, props.userName);
+  const loginDisplay = () => {
+    if (props.isSignedIn) {
+      return (
+        <>
+          <li className="navbar__list-item">
+            <span>Welcome {props.userName}</span>
+          </li>
+          <li className="navbar__list-item">
+            <Link>LogOut</Link>
+          </li>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <li className="navbar__list-item">
+            <Link to="/login" className="navbar__link navbar__link--login">
+              Login
+            </Link>
+          </li>
+          <li className="navbar__list-item">
+            <Link
+              to="/register"
+              className="navbar__link navbar__link--register"
+            >
+              Register
+            </Link>
+          </li>
+        </>
+      );
+    }
+  };
+
   return (
     <nav className="navbar">
       <Link to="/" className="navbar__logo">
@@ -18,22 +53,28 @@ const NavBar = () => {
           <Link to="/" className="navbar__link">
             Start
           </Link>
+        </li>
+        <li className="navbar__list-item">
           <Link to="/homes" className="navbar__link">
             Search
           </Link>
+        </li>
+        <li className="navbar__list-item">
           <Link to="/add" className="navbar__link">
             Add residence
           </Link>
-          <Link to="/login" className="navbar__link navbar__link--login">
-            Login
-          </Link>
-          <Link to="/register" className="navbar__link navbar__link--register">
-            Register
-          </Link>
         </li>
+        {loginDisplay()}
       </ul>
     </nav>
   );
 };
 
-export default NavBar;
+const mapStateToProps = state => {
+  return {
+    isSignedIn: state.user.isSignedIn,
+    userName: state.user.name
+  };
+};
+
+export default connect(mapStateToProps)(NavBar);

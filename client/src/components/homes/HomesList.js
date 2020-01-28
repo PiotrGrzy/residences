@@ -6,6 +6,7 @@ import { fetchHomes } from '../../actions';
 import Home from './Home';
 
 import './homes-list.scss';
+import HomesFilters from './HomesFilters';
 
 const HomesList = props => {
   useEffect(() => {
@@ -14,6 +15,7 @@ const HomesList = props => {
 
   return (
     <div className="homes">
+      <HomesFilters />
       <ul className="homes__list">
         {props.homes.map(home => (
           <Home key={home._id} home={home} />

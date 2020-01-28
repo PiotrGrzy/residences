@@ -81,4 +81,17 @@
       color: $color-font-gold;
     }
   }
+
+  &__goback {
+    text-decoration: none;
+    border: none;
+    background-color: transparent;
+    padding: 1rem;
+    font-size: 1.8rem;
+    color: $color-font-gold;
+    font-family: inherit;
+    cursor: pointer;
+    grid-column: 1/-1;
+    text-align: center;
+  }
 }

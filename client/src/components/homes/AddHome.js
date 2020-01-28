@@ -57,6 +57,12 @@ const AddHome = props => {
           )}
         </div>
 
+        {/* <FormField
+          name="title"
+          error="Title is required, it must be at least 6chars long."
+          validation={{ required: true, minLength: 6 }}
+        /> */}
+
         <label htmlFor="country" className="addhome__label">
           Country:
         </label>

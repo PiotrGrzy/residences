@@ -1,11 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './home.scss';
+import numeral from 'numeral';
+
 const Home = ({
   home: { _id, images, title, rooms, area, price, location, date, build, floor }
 }) => {
   const dateDisplay = date.slice(0, 10);
-
+  const priceDisplay = numeral(price)
+    .format('0,0,0')
+    .replace(',', ' ');
   return (
     <li>
       <Link className="home" to={`homes/${_id}`}>
@@ -22,7 +26,7 @@ const Home = ({
         </div>
         <div className="home__data">
           <h2 className="home__title">{title}</h2>
-          <p className="home__price ">{price} PLN</p>
+          <p className="home__price ">{priceDisplay} PLN</p>
           <p className="home__location">
             {location.country}, {location.city}, {location.street}
           </p>

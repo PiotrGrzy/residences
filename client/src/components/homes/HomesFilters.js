@@ -122,7 +122,7 @@ const HomesFilters = props => {
           Sort by:
         </label>
         <select
-          defaultValue="added-up"
+          defaultValue="-date"
           className="filter__select"
           name="sort"
           id="sort"
@@ -140,10 +140,10 @@ const HomesFilters = props => {
           <option className="filter__sort-option" value="-price">
             'Price: High to Low'
           </option>
-          <option className="filter__sort-option" value="date">
+          <option className="filter__sort-option" value="-date">
             'From Newiest'
           </option>
-          <option className="filter__sort-option" value="-date">
+          <option className="filter__sort-option" value="date">
             'From Oldest'
           </option>
         </select>

@@ -31,6 +31,7 @@ const AddHome = props => {
         owner: { ...props.user }
       };
       props.addHome(newHomeData);
+      reset(defaultValues);
     } else {
       alert('U must be signed in to add new residence');
     }

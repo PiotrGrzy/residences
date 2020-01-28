@@ -12,15 +12,18 @@ const HomesList = props => {
   useEffect(() => {
     props.fetchHomes(props.query);
   }, [props.query]);
-
   return (
     <div className="homes">
       <HomesFilters />
-      <ul className="homes__list">
-        {props.homes.map(home => (
-          <Home key={home._id} home={home} />
-        ))}
-      </ul>
+      {props.homes.length <= 0 ? (
+        <h2 style={{ textAlign: 'center' }}>No results found</h2>
+      ) : (
+        <ul className="homes__list">
+          {props.homes.map(home => (
+            <Home key={home._id} home={home} />
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

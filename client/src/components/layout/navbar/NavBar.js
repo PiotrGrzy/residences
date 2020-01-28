@@ -15,6 +15,11 @@ const NavBar = props => {
             <span>Welcome {props.userName}</span>
           </li>
           <li className="navbar__list-item">
+            <Link to="/usershomes" className="navbar__link navbar__link--login">
+              Your offers
+            </Link>
+          </li>
+          <li className="navbar__list-item">
             <button onClick={props.logoutUser} className="navbar__logout">
               LogOut <i className="lni-shift-right"></i>
             </button>

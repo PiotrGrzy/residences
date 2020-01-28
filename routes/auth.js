@@ -6,6 +6,7 @@ const { check, validationResult } = require('express-validator');
 
 const User = require('../models/User');
 const auth = require('../middleware/checkToken');
+
 // Get logged in user data
 
 router.get('/', auth, async (req, res) => {

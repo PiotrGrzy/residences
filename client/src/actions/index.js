@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-
+import { history } from '../components/App';
 import {
   SET_LOADING,
   FETCH_HOMES,
@@ -9,7 +9,8 @@ import {
   REGISTER_USER,
   LOGOUT_USER,
   ADD_HOME,
-  SET_QUERY
+  SET_QUERY,
+  SET_USER
 } from './types';
 
 export const setLoading = () => {
@@ -43,6 +44,23 @@ export const fetchSingleHome = id => async dispatch => {
   }
 };
 
+export const getUser = () => async dispatch => {
+  const token = Cookies.get('token');
+  if (token) {
+    try {
+      const response = await axios.get('http://localhost:5000/api/auth', {
+        headers: {
+          'x-auth-token': token
+        }
+      });
+      console.log(response.data);
+      dispatch({ type: SET_USER, payload: response.data });
+    } catch (err) {
+      console.log(err);
+    }
+  } else return;
+};
+
 export const loginUser = formData => async dispatch => {
   try {
     const response = await axios({
@@ -54,6 +72,7 @@ export const loginUser = formData => async dispatch => {
 
     Cookies.set('token', response.data.token);
     dispatch({ type: LOGIN_USER, payload: response.data });
+    history.push('/homes');
   } catch (err) {
     console.log(err);
   }
@@ -70,12 +89,14 @@ export const registerUser = formData => async dispatch => {
 
     Cookies.set('token', response.data.token);
     dispatch({ type: REGISTER_USER, payload: response.data });
+    history.push('/homes');
   } catch (err) {
     console.log(err);
   }
 };
 
 export const logoutUser = () => {
+  Cookies.remove('token');
   return { type: LOGOUT_USER };
 };
 

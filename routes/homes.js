@@ -10,10 +10,14 @@ const APIFeatures = require('../utils/apiFeatures');
 
 router.get('/', async (req, res) => {
   try {
-    const features = new APIFeatures(Home.find(), req.query).filter().sort();
-    const homes = await features.query;
-
-    res.status(200).json(homes);
+    if (req.query.user) {
+      const homes = await Home.find({ 'owner.id': req.query.user });
+      res.status(200).json(homes);
+    } else {
+      const features = new APIFeatures(Home.find(), req.query).filter().sort();
+      const homes = await features.query;
+      res.status(200).json(homes);
+    }
   } catch (err) {
     console.log(err);
     res.send(400).send('server error');

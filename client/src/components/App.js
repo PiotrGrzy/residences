@@ -1,6 +1,9 @@
-import React from 'react';
-
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { Router } from 'react-router';
+//import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 
 import './app.scss';
 
@@ -12,10 +15,18 @@ import Register from './user/Register';
 import HomesList from './homes/HomesList';
 import SingleHome from './homes/SingleHome';
 import AddHome from './homes/AddHome';
+import UsersHomes from './user/UsersHomes';
+import { getUser } from '../actions';
+
+export const history = createBrowserHistory();
 
 const App = props => {
+  useEffect(() => {
+    props.getUser();
+  }, []);
+
   return (
-    <Router>
+    <Router history={history}>
       <div className="App">
         <NavBar />
         <main className="main">
@@ -24,6 +35,7 @@ const App = props => {
           <Route path="/register" exact component={Register} />
           <Route path="/homes" exact component={HomesList} />
           <Route path="/homes/:id" exact component={SingleHome} />
+          <Route path="/usershomes" exact component={UsersHomes} />
           <Route path="/add" exact component={AddHome} />
         </main>
         <Footer />
@@ -32,4 +44,4 @@ const App = props => {
   );
 };
 
-export default App;
+export default connect(null, { getUser })(App);

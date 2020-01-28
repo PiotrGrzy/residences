@@ -6,7 +6,7 @@ export const UPDATE_HOME = 'UPDATE_HOME';
 export const LOGIN_USER = 'LOGIN_USER';
 export const REGISTER_USER = 'REGISTER_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
-
+export const SET_USER = 'SET_USER';
 export const SET_LOADING = 'SET_LOADING';
 
 export const SET_QUERY = 'SET_QUERY';

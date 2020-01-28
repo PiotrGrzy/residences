@@ -13,6 +13,7 @@ const HomeSchema = mongoose.Schema({
   //   },
   owner: {
     id: { type: mongoose.Schema.Types.ObjectId, required: true },
+
     name: { type: String, required: true },
     phone: { type: String, required: true },
     email: { type: String, required: true }

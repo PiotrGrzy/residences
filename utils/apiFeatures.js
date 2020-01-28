@@ -22,7 +22,7 @@ class APIFeatures {
       // If there is a sort query, sort by it
       this.query = this.query.sort(this.queryString.sort);
     } else {
-      // else sort from newest - not working yet
+      // else sort from newest
       this.query = this.query.sort('-date');
     }
     return this;

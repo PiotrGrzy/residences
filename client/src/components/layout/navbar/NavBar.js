@@ -12,9 +12,6 @@ const NavBar = props => {
       return (
         <>
           <li className="navbar__list-item">
-            <span>Welcome {props.userName}</span>
-          </li>
-          <li className="navbar__list-item">
             <Link to="/usershomes" className="navbar__link navbar__link--login">
               Your offers
             </Link>

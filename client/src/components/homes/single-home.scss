@@ -74,9 +74,10 @@
     justify-content: space-around;
     padding-left: 2rem;
 
-    & > * {
+    &>* {
       margin-bottom: 1rem;
     }
+
     i {
       color: $color-font-gold;
     }
@@ -93,5 +94,27 @@
     cursor: pointer;
     grid-column: 1/-1;
     text-align: center;
+  }
+
+  &__btn {
+    display: block;
+    margin: 1rem auto;
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1.6rem;
+    border-radius: 5px;
+
+    transition: background-color 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+
+  &__btn--delete {
+    background-color: rgb(190, 93, 93);
+  }
+
+  &__btn--update {
+    background-color: $color-font-gold;
+
   }
 }

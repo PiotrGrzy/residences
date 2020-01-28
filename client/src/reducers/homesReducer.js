@@ -1,4 +1,9 @@
-import { FETCH_HOMES, FETCH_SINGLE, SET_QUERY } from '../actions/types';
+import {
+  FETCH_HOMES,
+  FETCH_SINGLE,
+  SET_QUERY,
+  DELETE_HOME
+} from '../actions/types';
 
 const initialState = {
   list: [],
@@ -25,7 +30,11 @@ export default (state = initialState, action) => {
         ...state,
         currentQuery: action.payload
       };
-
+    case DELETE_HOME:
+      return {
+        ...state,
+        list: state.list.filter(home => home.id !== action.payload)
+      };
     default:
       return state;
   }

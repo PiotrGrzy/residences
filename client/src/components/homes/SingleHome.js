@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import ImageGallery from 'react-image-gallery';
 import numeral from 'numeral';
 import { connect } from 'react-redux';
-import { fetchSingleHome } from '../../actions';
+import { fetchSingleHome, deleteHome } from '../../actions';
 
 import './single-home.scss';
 import './image-gallery.scss';
@@ -14,6 +14,7 @@ const SingleHome = props => {
 
   if (props.current.title) {
     const {
+      _id,
       images,
       title,
       rooms,
@@ -97,6 +98,20 @@ const SingleHome = props => {
             {description}
           </p>
           <p className="single__date">Added: {dateDisplay}</p>
+          {owner.id !== props.currentUserId ? null : (
+            <>
+              <button
+                onClick={() => props.deleteHome(_id)}
+                className="single__btn single__btn--delete"
+              >
+                Delete
+              </button>
+              <button className="single__btn single__btn--update">
+                Update
+              </button>
+            </>
+          )}
+
           <a className="single__goback" onClick={() => props.history.goBack()}>
             <i className="lni-angle-double-left"></i> Back to results
           </a>
@@ -108,8 +123,11 @@ const SingleHome = props => {
 
 const mapStateToProps = state => {
   return {
-    current: state.homes.currentHome
+    current: state.homes.currentHome,
+    currentUserId: state.user.id
   };
 };
 
-export default connect(mapStateToProps, { fetchSingleHome })(SingleHome);
+export default connect(mapStateToProps, { fetchSingleHome, deleteHome })(
+  SingleHome
+);

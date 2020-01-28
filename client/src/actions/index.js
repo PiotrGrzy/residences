@@ -10,7 +10,8 @@ import {
   LOGOUT_USER,
   ADD_HOME,
   SET_QUERY,
-  SET_USER
+  SET_USER,
+  DELETE_HOME
 } from './types';
 
 export const setLoading = () => {
@@ -97,6 +98,7 @@ export const registerUser = formData => async dispatch => {
 
 export const logoutUser = () => {
   Cookies.remove('token');
+  history.push('/homes');
   return { type: LOGOUT_USER };
 };
 
@@ -139,4 +141,23 @@ export const addHome = data => async dispatch => {
   } catch (err) {
     console.log(err);
   }
+};
+
+export const deleteHome = id => async dispatch => {
+  const token = Cookies.get('token');
+  try {
+    await axios.delete(`http://localhost:5000/api/homes/${id}`, {
+      headers: {
+        'x-auth-token': token
+      }
+    });
+    dispatch({ type: DELETE_HOME, payload: id });
+    history.push('/usershomes');
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const updateHome = id => async dispatch => {
+  console.log(id);
 };

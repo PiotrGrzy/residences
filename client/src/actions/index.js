@@ -8,7 +8,8 @@ import {
   LOGIN_USER,
   REGISTER_USER,
   LOGOUT_USER,
-  ADD_HOME
+  ADD_HOME,
+  SET_QUERY
 } from './types';
 
 export const setLoading = () => {
@@ -17,9 +18,17 @@ export const setLoading = () => {
   };
 };
 
-export const fetchHomes = () => async dispatch => {
-  const response = await axios.get('http://localhost:5000/api/homes');
-  console.log(response);
+export const setQuery = query => {
+  return {
+    type: SET_QUERY,
+    payload: query
+  };
+};
+
+export const fetchHomes = (query = '') => async dispatch => {
+  console.log(query);
+  const response = await axios.get(`http://localhost:5000/api/homes/${query}`);
+  //console.log(response);
 
   dispatch({ type: FETCH_HOMES, payload: response.data });
 };

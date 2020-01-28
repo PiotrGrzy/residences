@@ -1,8 +1,9 @@
-import { FETCH_HOMES, FETCH_SINGLE } from '../actions/types';
+import { FETCH_HOMES, FETCH_SINGLE, SET_QUERY } from '../actions/types';
 
 const initialState = {
   list: [],
-  currentHome: {}
+  currentHome: {},
+  currentQuery: ''
 };
 
 export default (state = initialState, action) => {
@@ -19,6 +20,12 @@ export default (state = initialState, action) => {
         currentHome: action.payload
       };
     }
+    case SET_QUERY:
+      return {
+        ...state,
+        currentQuery: action.payload
+      };
+
     default:
       return state;
   }

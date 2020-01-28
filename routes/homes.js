@@ -4,10 +4,14 @@ const { check, validationResult } = require('express-validator');
 const Home = require('../models/Home');
 const checkToken = require('../middleware/checkToken');
 const upload = require('./upload');
+const APIFeatures = require('../utils/apiFeatures');
+
+// Get List of Homes
 
 router.get('/', async (req, res) => {
   try {
-    const homes = await Home.find();
+    const features = new APIFeatures(Home.find(), req.query).filter().sort();
+    const homes = await features.query;
 
     res.status(200).json(homes);
   } catch (err) {
@@ -15,6 +19,8 @@ router.get('/', async (req, res) => {
     res.send(400).send('server error');
   }
 });
+
+// Get single Home
 
 router.get('/:id', async (req, res) => {
   try {
@@ -26,6 +32,8 @@ router.get('/:id', async (req, res) => {
     console.log(err);
   }
 });
+
+// Post New Home
 
 router.post(
   '/',
@@ -102,6 +110,8 @@ router.post(
   }
 );
 
+// Update Home
+
 router.patch('/:id', checkToken, async (req, res) => {
   try {
     const home = await Home.findByIdAndUpdate(req.params.id, req.body, {
@@ -113,6 +123,8 @@ router.patch('/:id', checkToken, async (req, res) => {
     res.status(400).json(err);
   }
 });
+
+// Delete Home
 
 router.delete('/:id', checkToken, async (req, res) => {
   try {

@@ -1,17 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import { setQuery } from '../../actions';
 import './homes-filters.scss';
 
-const HomesFilters = () => {
-  const sortOptions = [
-    'Price: Low to High',
-    'Price: High to Low',
-    'Area: High to Low',
-    'Area: Low to Hign',
-    'Added: from Newiest',
-    'Added: from Oldest'
-  ];
-
+const HomesFilters = props => {
   const defaultValues = {
     areaFrom: '',
     areaTo: '',
@@ -24,6 +17,24 @@ const HomesFilters = () => {
 
   const onSubmit = values => {
     console.log(values);
+
+    const queryObj = {
+      city: values.city ? `city=${values.city}` : null,
+      priceFrom: values.priceFrom ? `price[gte]=${values.priceFrom}` : null,
+      priceTo: values.priceTo ? `price[lte]=${values.priceTo}` : null,
+      areaFrom: values.areaFrom ? `area[gte]=${values.areaFrom}` : null,
+      areaTo: values.areaTo ? `area[lte]=${values.areaTo}` : null,
+      roomsFrom: values.roomsFrom ? `rooms[gte]=${values.roomsFrom}` : null,
+      roomsTo: values.roomsTo ? `rooms[lte]=${values.roomsTo}` : null,
+      sorting: values.sort ? `sort=${values.sort}` : null
+    };
+
+    let query = '?';
+    for (const item in queryObj) {
+      if (queryObj[item]) query += queryObj[item] + '&';
+    }
+    console.log(query);
+    props.setQuery(query);
   };
 
   const resetForm = () => {
@@ -117,22 +128,22 @@ const HomesFilters = () => {
           id="sort"
           ref={register({})}
         >
-          <option className="filter__sort-option" value="area-up">
+          <option className="filter__sort-option" value="area">
             'Area: Low to High'
           </option>
-          <option className="filter__sort-option" value="area-down">
+          <option className="filter__sort-option" value="-area">
             'Area: High to Low'
           </option>
-          <option className="filter__sort-option" value="price-up">
+          <option className="filter__sort-option" value="price">
             'Price: Low to High'
           </option>
-          <option className="filter__sort-option" value="price-down">
+          <option className="filter__sort-option" value="-price">
             'Price: High to Low'
           </option>
-          <option className="filter__sort-option" value="added-up">
+          <option className="filter__sort-option" value="date">
             'From Newiest'
           </option>
-          <option className="filter__sort-option" value="added-down">
+          <option className="filter__sort-option" value="-date">
             'From Oldest'
           </option>
         </select>
@@ -147,4 +158,4 @@ const HomesFilters = () => {
   );
 };
 
-export default HomesFilters;
+export default connect(null, { setQuery })(HomesFilters);

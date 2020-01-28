@@ -10,8 +10,8 @@ import HomesFilters from './HomesFilters';
 
 const HomesList = props => {
   useEffect(() => {
-    props.fetchHomes();
-  }, []);
+    props.fetchHomes(props.query);
+  }, [props.query]);
 
   return (
     <div className="homes">
@@ -27,7 +27,8 @@ const HomesList = props => {
 
 const mapStateToProps = state => {
   return {
-    homes: state.homes.list
+    homes: state.homes.list,
+    query: state.homes.currentQuery
   };
 };
 

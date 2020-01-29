@@ -8,7 +8,7 @@ import './add-home.scss';
 import Loader from '../utils/Loader';
 
 const AddHome = props => {
-  const defaultValues = {
+  let defaultValues = {
     title: '',
     country: 'Poland',
     city: '',
@@ -20,6 +20,21 @@ const AddHome = props => {
     description: '',
     build: ''
   };
+
+  if (props.current) {
+    defaultValues = {
+      title: props.current.title,
+      country: props.current.location.country,
+      city: props.current.location.city,
+      street: props.current.location.street,
+      rooms: props.current.rooms,
+      area: props.current.area,
+      floor: props.current.floor,
+      price: props.current.price,
+      description: props.current.description,
+      build: props.current.build
+    };
+  }
 
   const { register, handleSubmit, watch, errors, reset } = useForm({
     defaultValues
@@ -250,6 +265,7 @@ const AddHome = props => {
 const mapStateToProps = state => {
   return {
     user: state.user,
+
     loading: state.homes.loading
   };
 };

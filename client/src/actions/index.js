@@ -7,7 +7,6 @@ import 'react-notifications-component/dist/theme.css';
 import 'animate.css';
 
 import {
-  SET_LOADING,
   FETCH_HOMES,
   FETCH_SINGLE,
   LOGIN_USER,
@@ -16,10 +15,12 @@ import {
   ADD_HOME,
   SET_QUERY,
   SET_USER,
-  DELETE_HOME
+  DELETE_HOME,
+  SET_LOADING,
+  ACTION_FAILED
 } from './types';
 
-const notification = (type, message, title, position = 'top-right') => {
+const notification = (type, message, title, position = 'top-left') => {
   return store.addNotification({
     title: title,
     message: message,
@@ -39,6 +40,12 @@ export const setQuery = query => {
   return {
     type: SET_QUERY,
     payload: query
+  };
+};
+
+export const setLoading = () => {
+  return {
+    type: SET_LOADING
   };
 };
 
@@ -176,7 +183,7 @@ export const addHome = data => async dispatch => {
 
     const response = await axios({
       method: 'post',
-      url: 'http://localhost:5000/api/homes',
+      url: 'http://localhost:5000/api/homess',
       data: formdata,
       headers: {
         'x-auth-token': token,
@@ -189,6 +196,7 @@ export const addHome = data => async dispatch => {
     notification('success', 'New home offer added successfully!', `Success`);
   } catch (err) {
     console.log(err);
+    dispatch({ type: ACTION_FAILED });
     notification(
       'warning',
       'Something went wrong, the offer wasnt added to database',

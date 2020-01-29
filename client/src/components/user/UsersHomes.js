@@ -7,7 +7,7 @@ import HomesList from '../homes/HomesList';
 const UsersHomes = props => {
   useEffect(() => {
     if (props.userId) {
-      props.setQuery(`?user=${props.userId}`);
+      props.setQuery(`?user=${props.userId}&sort=-date`);
     } else {
       props.history.push('/homes');
     }
@@ -16,8 +16,9 @@ const UsersHomes = props => {
 
   useEffect(() => {
     return () => {
-      props.setQuery('');
+      props.setQuery('?sort=-date');
     };
+    // eslint-disable-next-line
   }, []);
 
   return (

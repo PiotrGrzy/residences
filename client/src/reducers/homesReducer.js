@@ -3,18 +3,31 @@ import {
   FETCH_SINGLE,
   ADD_HOME,
   SET_QUERY,
-  DELETE_HOME
+  DELETE_HOME,
+  SET_LOADING,
+  ACTION_FAILED
 } from '../actions/types';
 
 const initialState = {
   list: [],
   currentHome: {},
   currentQuery: '?sort=-date&',
-  loading: true
+  loading: false
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: true
+      };
+    case ACTION_FAILED: {
+      return {
+        ...state,
+        loading: false
+      };
+    }
     case FETCH_HOMES: {
       return {
         ...state,

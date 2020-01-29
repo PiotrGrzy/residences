@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
-import { addHome } from '../../actions';
+import { addHome, setLoading } from '../../actions';
 
 import './add-home.scss';
 import Loader from '../utils/Loader';
@@ -27,6 +27,7 @@ const AddHome = props => {
 
   const onSubmit = data => {
     if (props.user.isSignedIn) {
+      props.setLoading();
       const newHomeData = {
         ...data,
         owner: { ...props.user }
@@ -253,4 +254,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { addHome })(AddHome);
+export default connect(mapStateToProps, { addHome, setLoading })(AddHome);

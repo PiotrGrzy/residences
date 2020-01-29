@@ -10,7 +10,8 @@ const initialState = {
   id: null,
   name: null,
   email: null,
-  phone: null
+  phone: null,
+  loading: false
 };
 
 export default (state = initialState, action) => {
@@ -23,7 +24,8 @@ export default (state = initialState, action) => {
         id: _id,
         name,
         email,
-        phone
+        phone,
+        loading: false
       };
     }
     case SET_USER: {

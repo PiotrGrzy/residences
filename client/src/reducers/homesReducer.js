@@ -1,6 +1,7 @@
 import {
   FETCH_HOMES,
   FETCH_SINGLE,
+  ADD_HOME,
   SET_QUERY,
   DELETE_HOME
 } from '../actions/types';
@@ -8,7 +9,8 @@ import {
 const initialState = {
   list: [],
   currentHome: {},
-  currentQuery: ''
+  currentQuery: '?sort=-date&',
+  loading: true
 };
 
 export default (state = initialState, action) => {
@@ -16,13 +18,22 @@ export default (state = initialState, action) => {
     case FETCH_HOMES: {
       return {
         ...state,
-        list: action.payload
+        list: action.payload,
+        loading: false
       };
     }
     case FETCH_SINGLE: {
       return {
         ...state,
-        currentHome: action.payload
+        currentHome: action.payload,
+        loading: false
+      };
+    }
+    case ADD_HOME: {
+      return {
+        ...state,
+        list: [...state.list, action.payload],
+        loading: false
       };
     }
     case SET_QUERY:
@@ -33,7 +44,8 @@ export default (state = initialState, action) => {
     case DELETE_HOME:
       return {
         ...state,
-        list: state.list.filter(home => home.id !== action.payload)
+        list: state.list.filter(home => home.id !== action.payload),
+        loading: false
       };
     default:
       return state;

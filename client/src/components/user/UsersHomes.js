@@ -6,7 +6,12 @@ import HomesList from '../homes/HomesList';
 
 const UsersHomes = props => {
   useEffect(() => {
-    props.setQuery(`?user=${props.userId}`);
+    if (props.userId) {
+      props.setQuery(`?user=${props.userId}`);
+    } else {
+      props.history.push('/homes');
+    }
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -17,7 +22,6 @@ const UsersHomes = props => {
 
   return (
     <div>
-      <h2>Your Offers</h2>
       <HomesList />
     </div>
   );

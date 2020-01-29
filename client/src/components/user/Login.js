@@ -17,8 +17,7 @@ const Login = props => {
 
   const onSubmit = data => {
     props.loginUser(data);
-    reset(defaultValues);
-    props.history.push('/homes');
+    //reset(defaultValues);
   };
 
   return (

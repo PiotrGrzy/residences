@@ -4,8 +4,7 @@ import { Router } from 'react-router';
 //import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-
-import './app.scss';
+import ReactNotifications from 'react-notifications-component';
 
 import NavBar from './layout/navbar/NavBar';
 import Footer from './layout/footer/Footer';
@@ -18,6 +17,7 @@ import AddHome from './homes/AddHome';
 import UsersHomes from './user/UsersHomes';
 import { getUser } from '../actions';
 
+import './app.scss';
 export const history = createBrowserHistory();
 
 const App = props => {
@@ -28,6 +28,7 @@ const App = props => {
   return (
     <Router history={history}>
       <div className="App">
+        <ReactNotifications />
         <NavBar />
         <main className="main">
           <Route path="/" exact component={Start} />

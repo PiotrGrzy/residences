@@ -6,11 +6,15 @@ import { logoutUser } from '../../../actions';
 import './navbar.scss';
 
 const NavBar = props => {
-  console.log(props.isSignedIn, props.userName);
   const loginDisplay = () => {
     if (props.isSignedIn) {
       return (
         <>
+          <li className="navbar__list-item">
+            <Link to="/add" className="navbar__link">
+              Add residence
+            </Link>
+          </li>
           <li className="navbar__list-item">
             <Link to="/usershomes" className="navbar__link navbar__link--login">
               Your offers
@@ -64,11 +68,7 @@ const NavBar = props => {
             Search
           </Link>
         </li>
-        <li className="navbar__list-item">
-          <Link to="/add" className="navbar__link">
-            Add residence
-          </Link>
-        </li>
+
         {loginDisplay()}
       </ul>
     </nav>

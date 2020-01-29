@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { addHome } from '../../actions';
 
 import './add-home.scss';
+import Loader from '../utils/Loader';
 
 const AddHome = props => {
   const defaultValues = {
@@ -36,6 +37,10 @@ const AddHome = props => {
       alert('U must be signed in to add new residence');
     }
   };
+
+  if (props.loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="addhome">
@@ -243,7 +248,8 @@ const AddHome = props => {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    loading: state.homes.loading
   };
 };
 

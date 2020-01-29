@@ -1,6 +1,11 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { history } from '../components/App';
+
+import { store } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+import 'animate.css';
+
 import {
   SET_LOADING,
   FETCH_HOMES,
@@ -14,10 +19,20 @@ import {
   DELETE_HOME
 } from './types';
 
-export const setLoading = () => {
-  return {
-    type: SET_LOADING
-  };
+const notification = (type, message, title, position = 'top-right') => {
+  return store.addNotification({
+    title: title,
+    message: message,
+    type: type,
+    insert: 'top',
+    container: position,
+    animationIn: ['animated', 'fadeIn'],
+    animationOut: ['animated', 'fadeOut'],
+    dismiss: {
+      duration: 5000,
+      onScreen: true
+    }
+  });
 };
 
 export const setQuery = query => {
@@ -29,10 +44,17 @@ export const setQuery = query => {
 
 export const fetchHomes = (query = '') => async dispatch => {
   console.log(query);
-  const response = await axios.get(`http://localhost:5000/api/homes/${query}`);
-  //console.log(response);
+  try {
+    const response = await axios.get(
+      `http://localhost:5000/api/homes/${query}`
+    );
+    //console.log(response);
+    const wait = await setTimeout(console.log('waited'), 5000);
 
-  dispatch({ type: FETCH_HOMES, payload: response.data });
+    dispatch({ type: FETCH_HOMES, payload: response.data });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const fetchSingleHome = id => async dispatch => {
@@ -56,6 +78,11 @@ export const getUser = () => async dispatch => {
       });
       console.log(response.data);
       dispatch({ type: SET_USER, payload: response.data });
+      notification(
+        'success',
+        'You are logged in.',
+        `Welcome back ${response.data.name}`
+      );
     } catch (err) {
       console.log(err);
     }
@@ -73,9 +100,20 @@ export const loginUser = formData => async dispatch => {
 
     Cookies.set('token', response.data.token);
     dispatch({ type: LOGIN_USER, payload: response.data });
+    notification(
+      'success',
+      'You have been successfully logged in',
+      `Welcome ${response.data.user.name}`
+    );
     history.push('/homes');
   } catch (err) {
     console.log(err);
+    notification(
+      'danger',
+      'Check your email and password, try again',
+      'Invalid email or password',
+      'top-center'
+    );
   }
 };
 
@@ -90,22 +128,32 @@ export const registerUser = formData => async dispatch => {
 
     Cookies.set('token', response.data.token);
     dispatch({ type: REGISTER_USER, payload: response.data });
+    notification(
+      'success',
+      'You have been successfully registered and logged in',
+      `Welcome ${response.data.user.name}`
+    );
     history.push('/homes');
   } catch (err) {
     console.log(err);
+    notification(
+      'danger',
+      'Check your data and try again',
+      'Something went wrong',
+      'top-center'
+    );
   }
 };
 
 export const logoutUser = () => {
   Cookies.remove('token');
   history.push('/homes');
+  notification('info', 'Logout successful', 'You have been logged out');
   return { type: LOGOUT_USER };
 };
 
 export const addHome = data => async dispatch => {
   try {
-    console.log(data);
-
     const formdata = new FormData();
     formdata.append('title', data.title);
     formdata.append('rooms', data.rooms);
@@ -136,10 +184,16 @@ export const addHome = data => async dispatch => {
       }
     });
 
-    console.log(response.data);
     dispatch({ type: ADD_HOME, payload: response.data });
+    history.push('/usershomes');
+    notification('success', 'New home offer added successfully!', `Success`);
   } catch (err) {
     console.log(err);
+    notification(
+      'warning',
+      'Something went wrong, the offer wasnt added to database',
+      `We are sorry`
+    );
   }
 };
 
@@ -152,9 +206,15 @@ export const deleteHome = id => async dispatch => {
       }
     });
     dispatch({ type: DELETE_HOME, payload: id });
+    notification('info', 'Offer has been successfully deleted', `Deleted`);
     history.push('/usershomes');
   } catch (err) {
     console.log(err);
+    notification(
+      'warning',
+      'Something went wrong, we werent able to delete this offer',
+      `We are sorry`
+    );
   }
 };
 

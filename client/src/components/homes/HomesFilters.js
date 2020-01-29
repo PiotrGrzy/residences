@@ -12,7 +12,8 @@ const HomesFilters = props => {
     priceTo: '',
     roomsFrom: '',
     roomsTo: '',
-    city: ''
+    city: '',
+    sort: '-date'
   };
 
   const onSubmit = values => {

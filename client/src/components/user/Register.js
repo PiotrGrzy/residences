@@ -12,7 +12,7 @@ const Register = props => {
     password: ''
   };
 
-  const { register, handleSubmit, watch, errors, reset } = useForm({
+  const { register, handleSubmit, reset, errors } = useForm({
     defaultValues
   });
 
@@ -56,6 +56,7 @@ const Register = props => {
           name="email"
           ref={register({
             required: true,
+            // eslint-disable-next-line
             pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
           })}
         />

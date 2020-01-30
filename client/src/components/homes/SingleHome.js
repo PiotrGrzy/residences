@@ -10,6 +10,7 @@ import './image-gallery.scss';
 const SingleHome = props => {
   useEffect(() => {
     props.fetchSingleHome(props.match.params.id);
+    // eslint-disable-next-line
   }, []);
 
   if (props.current.title) {

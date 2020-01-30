@@ -36,7 +36,7 @@ const AddHome = props => {
     };
   }
 
-  const { register, handleSubmit, watch, errors, reset } = useForm({
+  const { register, handleSubmit, errors, reset } = useForm({
     defaultValues
   });
 

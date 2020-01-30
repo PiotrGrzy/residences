@@ -56,7 +56,6 @@ export const fetchHomes = (query = '') => async dispatch => {
       `http://localhost:5000/api/homes/${query}`
     );
     //console.log(response);
-    const wait = await setTimeout(console.log('waited'), 5000);
 
     dispatch({ type: FETCH_HOMES, payload: response.data });
   } catch (err) {
@@ -183,7 +182,7 @@ export const addHome = data => async dispatch => {
 
     const response = await axios({
       method: 'post',
-      url: 'http://localhost:5000/api/homess',
+      url: 'http://localhost:5000/api/homes',
       data: formdata,
       headers: {
         'x-auth-token': token,

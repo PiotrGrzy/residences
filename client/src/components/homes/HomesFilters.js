@@ -42,7 +42,7 @@ const HomesFilters = props => {
     reset(defaultValues);
   };
 
-  const { register, handleSubmit, watch, errors, reset } = useForm({
+  const { register, handleSubmit, reset } = useForm({
     defaultValues
   });
 

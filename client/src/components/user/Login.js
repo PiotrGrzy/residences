@@ -11,7 +11,7 @@ const Login = props => {
     password: ''
   };
 
-  const { register, handleSubmit, watch, errors, reset } = useForm({
+  const { register, handleSubmit, errors } = useForm({
     defaultValues
   });
 

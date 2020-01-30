@@ -19,6 +19,7 @@
     display: block;
     width: 12rem;
   }
+
   &__list {
     display: flex;
     justify-content: space-around;
@@ -32,9 +33,10 @@
     text-decoration: none;
     padding: 0 1rem;
 
+    &--add,
     &--login {
       margin-left: 6rem;
-      color: blue;
+
     }
   }
 
@@ -50,5 +52,6 @@
     background-color: rgb(170, 169, 169);
     padding: 0.5rem;
     border-radius: 5px;
+
   }
 }

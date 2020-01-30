@@ -23,6 +23,7 @@ export const history = createBrowserHistory();
 const App = props => {
   useEffect(() => {
     props.getUser();
+    // eslint-disable-next-line
   }, []);
 
   return (

@@ -11,7 +11,7 @@ const NavBar = props => {
       return (
         <>
           <li className="navbar__list-item">
-            <Link to="/add" className="navbar__link">
+            <Link to="/add" className="navbar__link navbar__link--add">
               Add residence
             </Link>
           </li>

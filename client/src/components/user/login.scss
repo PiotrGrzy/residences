@@ -1,9 +1,7 @@
 @import '../vars';
 
 .login {
-
   margin: 4rem 0;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,6 +15,9 @@
     background-color: whitesmoke;
     border-radius: 10px;
     box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.2);
+    @include small {
+      width: 90vw;
+    }
   }
 
   &__input,

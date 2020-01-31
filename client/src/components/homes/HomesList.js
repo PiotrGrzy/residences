@@ -10,10 +10,10 @@ import HomesFilters from './HomesFilters';
 import Loader from '../utils/Loader';
 
 const HomesList = props => {
-  useEffect(() => {
-    props.fetchHomes(props.query);
-    // eslint-disable-next-line
-  }, [props.query]);
+  // useEffect(() => {
+  //   props.fetchHomes(props.query);
+  //   // eslint-disable-next-line
+  // }, [props.query]);
 
   if (props.loading)
     return (

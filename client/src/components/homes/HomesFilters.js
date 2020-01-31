@@ -50,105 +50,121 @@ const HomesFilters = props => {
   return (
     <div className="filter">
       <form className="filter__form" onSubmit={handleSubmit(onSubmit)}>
-        <label className="filter__label" htmlFor="areaFrom">
-          Area from:
-        </label>
-        <input
-          type="text"
-          className="filter__input"
-          id="areaFrom"
-          name="areaFrom"
-          ref={register({})}
-        />
-        <label className="filter__label" htmlFor="areaTo">
-          Area to:
-        </label>
-        <input
-          type="text"
-          className="filter__input"
-          id="areaTo"
-          name="areaTo"
-          ref={register({})}
-        />
-        <label className="filter__label" htmlFor="priceFrom">
-          Price from:
-        </label>
-        <input
-          type="text"
-          className="filter__input"
-          id="priceFrom"
-          name="priceFrom"
-          ref={register({})}
-        />
-        <label className="filter__label" htmlFor="priceTo">
-          Price to:
-        </label>
-        <input
-          type="text"
-          className="filter__input"
-          id="priceTo"
-          name="priceTo"
-          ref={register({})}
-        />
-        <label className="filter__label" htmlFor="roomsFrom">
-          Rooms from:
-        </label>
-        <input
-          type="text"
-          className="filter__input"
-          id="roomsFrom"
-          name="roomsFrom"
-          ref={register({})}
-        />
-        <label className="filter__label" htmlFor="roomsTo">
-          Rooms to:
-        </label>
-        <input
-          type="text"
-          className="filter__input"
-          id="roomsTo"
-          name="roomsTo"
-          ref={register({})}
-        />
-        <label className="filter__label" htmlFor="city">
-          City:
-        </label>
-        <input
-          type="text"
-          className="filter__input"
-          id="city"
-          name="city"
-          ref={register({})}
-        />
-        <label htmlFor="sort" className="filter__label">
-          Sort by:
-        </label>
-        <select
-          defaultValue="-date"
-          className="filter__select"
-          name="sort"
-          id="sort"
-          ref={register({})}
-        >
-          <option className="filter__sort-option" value="area">
-            'Area: Low to High'
-          </option>
-          <option className="filter__sort-option" value="-area">
-            'Area: High to Low'
-          </option>
-          <option className="filter__sort-option" value="price">
-            'Price: Low to High'
-          </option>
-          <option className="filter__sort-option" value="-price">
-            'Price: High to Low'
-          </option>
-          <option className="filter__sort-option" value="-date">
-            'From Newiest'
-          </option>
-          <option className="filter__sort-option" value="date">
-            'From Oldest'
-          </option>
-        </select>
+        <div>
+          <label className="filter__label" htmlFor="areaFrom">
+            Area from:
+          </label>
+          <input
+            type="text"
+            className="filter__input"
+            id="areaFrom"
+            name="areaFrom"
+            ref={register}
+          />
+        </div>
+        <div>
+          <label className="filter__label" htmlFor="areaTo">
+            Area to:
+          </label>
+          <input
+            type="text"
+            className="filter__input"
+            id="areaTo"
+            name="areaTo"
+            ref={register}
+          />
+        </div>
+        <div>
+          <label className="filter__label" htmlFor="priceFrom">
+            Price from:
+          </label>
+          <input
+            type="text"
+            className="filter__input"
+            id="priceFrom"
+            name="priceFrom"
+            ref={register}
+          />
+        </div>
+        <div>
+          <label className="filter__label" htmlFor="priceTo">
+            Price to:
+          </label>
+          <input
+            type="text"
+            className="filter__input"
+            id="priceTo"
+            name="priceTo"
+            ref={register}
+          />
+        </div>
+        <div>
+          <label className="filter__label" htmlFor="roomsFrom">
+            Rooms from:
+          </label>
+          <input
+            type="text"
+            className="filter__input"
+            id="roomsFrom"
+            name="roomsFrom"
+            ref={register}
+          />
+        </div>
+        <div>
+          <label className="filter__label" htmlFor="roomsTo">
+            Rooms to:
+          </label>
+          <input
+            type="text"
+            className="filter__input"
+            id="roomsTo"
+            name="roomsTo"
+            ref={register}
+          />
+        </div>
+        <div>
+          <label className="filter__label" htmlFor="city">
+            City:
+          </label>
+          <input
+            type="text"
+            className="filter__input"
+            id="city"
+            name="city"
+            ref={register}
+          />
+        </div>
+        <div>
+          <label htmlFor="sort" className="filter__label">
+            Sort by:
+          </label>
+          <select
+            defaultValue="-date"
+            className="filter__select"
+            name="sort"
+            id="sort"
+            ref={register}
+          >
+            <option className="filter__sort-option" value="area">
+              'Area: Low to High'
+            </option>
+            <option className="filter__sort-option" value="-area">
+              'Area: High to Low'
+            </option>
+            <option className="filter__sort-option" value="price">
+              'Price: Low to High'
+            </option>
+            <option className="filter__sort-option" value="-price">
+              'Price: High to Low'
+            </option>
+            <option className="filter__sort-option" value="-date">
+              'From Newiest'
+            </option>
+            <option className="filter__sort-option" value="date">
+              'From Oldest'
+            </option>
+          </select>
+        </div>
         <button onClick={resetForm} className="filter__btn filter__btn--reset">
           Reset Filters
         </button>

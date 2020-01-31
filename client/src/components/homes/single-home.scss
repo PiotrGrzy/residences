@@ -9,12 +9,15 @@
 
   &__details {
     margin-top: 2rem;
-
     padding: 4rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-auto-flow: dense;
     gap: 3rem;
+    @include small {
+      padding: 1rem;
+      gap: 1rem;
+    }
   }
 
   &__title {
@@ -27,6 +30,9 @@
     padding: 2rem 0;
     border-bottom: 2px solid $color-font-gold;
     border-top: 2px solid $color-font-gold;
+    @include small {
+      font-size: 2.6rem;
+    }
   }
 
   &__price {

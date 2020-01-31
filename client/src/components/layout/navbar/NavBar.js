@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../../actions';
@@ -6,6 +6,19 @@ import { logoutUser } from '../../../actions';
 import './navbar.scss';
 
 const NavBar = props => {
+  const [menu, setMenu] = useState('closed');
+  const [btn, setBtn] = useState('closed');
+
+  const toggleMenu = e => {
+    if (menu === 'closed') {
+      setMenu('opened');
+      setBtn('opened');
+    } else {
+      setMenu('closed');
+      setBtn('closed');
+    }
+  };
+
   const loginDisplay = () => {
     if (props.isSignedIn) {
       return (
@@ -31,12 +44,17 @@ const NavBar = props => {
       return (
         <>
           <li className="navbar__list-item">
-            <Link to="/login" className="navbar__link navbar__link--login">
+            <Link
+              onClick={toggleMenu}
+              to="/login"
+              className="navbar__link navbar__link--login"
+            >
               Login
             </Link>
           </li>
           <li className="navbar__list-item">
             <Link
+              onClick={toggleMenu}
               to="/register"
               className="navbar__link navbar__link--register"
             >
@@ -57,20 +75,36 @@ const NavBar = props => {
         />
       </Link>
 
-      <ul className="navbar__list">
+      <ul
+        className={
+          menu === 'opened' ? 'navbar__list navbar__list_open' : 'navbar__list'
+        }
+      >
         <li className="navbar__list-item">
-          <Link to="/" className="navbar__link">
+          <Link onClick={toggleMenu} to="/" className="navbar__link">
             Start
           </Link>
         </li>
         <li className="navbar__list-item">
-          <Link to="/homes" className="navbar__link">
+          <Link onClick={toggleMenu} to="/homes" className="navbar__link">
             Search
           </Link>
         </li>
 
         {loginDisplay()}
       </ul>
+      <button
+        onClick={toggleMenu}
+        class={
+          btn === 'opened'
+            ? 'navbar__menu-toggler navbar__menu-toggler_open'
+            : 'navbar__menu-toggler'
+        }
+        aria-expanded="false"
+      >
+        <span class="navbar__label">Open/close menu</span>
+        <span class="navbar__burger"></span>
+      </button>
     </nav>
   );
 };

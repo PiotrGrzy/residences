@@ -55,7 +55,6 @@ export const fetchHomes = (query = '') => async dispatch => {
     const response = await axios.get(
       `http://localhost:5000/api/homes/${query}`
     );
-    //console.log(response);
 
     dispatch({ type: FETCH_HOMES, payload: response.data });
   } catch (err) {
@@ -66,7 +65,7 @@ export const fetchHomes = (query = '') => async dispatch => {
 export const fetchSingleHome = id => async dispatch => {
   try {
     const response = await axios.get(`http://localhost:5000/api/homes/${id}`);
-    console.log(response);
+
     dispatch({ type: FETCH_SINGLE, payload: response.data });
   } catch (err) {
     console.log(err.msg);

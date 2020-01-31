@@ -12,28 +12,21 @@ html {
   font-size: 62.5%; // 1rem = 10px
   font-family: $font-primary;
   $color-font-dark: #222;
-  //   background: #56ccf2; /* fallback for old browsers */
-  //   background: -webkit-linear-gradient(
-  //     to right,
-  //     #2f80ed,
-  //     #56ccf2
-  //   ); /* Chrome 10-25, Safari 5.1-6 */
-  //   background: linear-gradient(
-  //     to right,
-  //     #2f80ed,
-  //     #56ccf2
-  //   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background: #e0eafc;
-  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #cfdef3, #e0eafc);
-  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #cfdef3, #e0eafc);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  @include medium {
+    font-size: 50%;
+  }
 }
 
 .main {
   min-height: 98vh;
   padding-top: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .input-wrapper {

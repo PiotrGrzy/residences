@@ -15,7 +15,7 @@ import HomesList from './homes/HomesList';
 import SingleHome from './homes/SingleHome';
 import AddHome from './homes/AddHome';
 import UsersHomes from './user/UsersHomes';
-import { getUser } from '../actions';
+import { getUser, fetchHomes } from '../actions';
 
 import './app.scss';
 export const history = createBrowserHistory();
@@ -23,8 +23,13 @@ export const history = createBrowserHistory();
 const App = props => {
   useEffect(() => {
     props.getUser();
+
     // eslint-disable-next-line
   }, []);
+  useEffect(() => {
+    props.fetchHomes(props.query);
+    // eslint-disable-next-line
+  }, [props.query]);
 
   return (
     <Router history={history}>
@@ -46,4 +51,10 @@ const App = props => {
   );
 };
 
-export default connect(null, { getUser })(App);
+const mapStateToProps = state => {
+  return {
+    query: state.homes.currentQuery
+  };
+};
+
+export default connect(mapStateToProps, { getUser, fetchHomes })(App);

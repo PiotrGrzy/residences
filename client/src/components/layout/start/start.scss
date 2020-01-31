@@ -27,12 +27,18 @@
     background-color: rgba(7, 1, 1, 0.5);
     color: whitesmoke;
     padding: 8rem 4rem;
+    @include medium {
+      width: 80%;
+    }
   }
 
   &__heading {
     text-align: center;
     font-size: 4.4rem;
     font-weight: 400;
+    @include medium {
+      font-size: 2.6rem;
+    }
   }
 
   &__link {
@@ -49,6 +55,10 @@
     border-radius: 10px;
     box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.2);
     transition: all 0.2s;
+    @include medium {
+      font-size: 1.8rem;
+      width: 20rem;
+    }
   }
 
   &__link:hover {

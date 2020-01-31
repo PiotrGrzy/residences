@@ -73,8 +73,9 @@
     flex-direction: column;
     justify-content: space-around;
     padding-left: 2rem;
+    text-transform: capitalize;
 
-    &>* {
+    & > * {
       margin-bottom: 1rem;
     }
 
@@ -115,6 +116,5 @@
 
   &__btn--update {
     background-color: $color-font-gold;
-
   }
 }

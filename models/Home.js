@@ -30,7 +30,7 @@ const HomeSchema = mongoose.Schema({
     type: Number,
     required: true
   },
-  build: {
+  built: {
     type: Number,
     required: true
   },

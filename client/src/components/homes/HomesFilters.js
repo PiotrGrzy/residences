@@ -17,10 +17,10 @@ const HomesFilters = props => {
   };
 
   const onSubmit = values => {
-    console.log(values);
+    // console.log(values);
 
     const queryObj = {
-      city: values.city ? `city=${values.city}` : null,
+      city: values.city ? `location.city=${values.city.toLowerCase()}` : null,
       priceFrom: values.priceFrom ? `price[gte]=${values.priceFrom}` : null,
       priceTo: values.priceTo ? `price[lte]=${values.priceTo}` : null,
       areaFrom: values.areaFrom ? `area[gte]=${values.areaFrom}` : null,
@@ -32,9 +32,10 @@ const HomesFilters = props => {
 
     let query = '?';
     for (const item in queryObj) {
+      console.log(queryObj[item]);
       if (queryObj[item]) query += queryObj[item] + '&';
     }
-    console.log(query);
+    //  console.log(query);
     props.setQuery(query);
   };
 

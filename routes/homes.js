@@ -46,10 +46,10 @@ router.post(
     check('title', 'Please enter title')
       .not()
       .isEmpty(),
-    check('rooms', 'Please enter rooms number')
+    check('rooms', 'Please enter number of rooms')
       .not()
       .isEmpty(),
-    check('area', 'Please enter area number')
+    check('area', 'Please enter area')
       .not()
       .isEmpty(),
     check('price', 'Please enter price')
@@ -82,7 +82,7 @@ router.post(
           title,
           rooms,
           area,
-          build,
+          built,
           floor,
           price,
           description,
@@ -95,7 +95,7 @@ router.post(
           title,
           rooms,
           area,
-          build,
+          built,
           floor,
           price,
           description,

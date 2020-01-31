@@ -166,7 +166,7 @@ export const addHome = data => async dispatch => {
     formdata.append('area', data.area);
     formdata.append('floor', data.floor);
     formdata.append('location[country]', data.country);
-    formdata.append('location[city]', data.city);
+    formdata.append('location[city]', data.city.toLowerCase());
     formdata.append('location[street]', data.street);
     formdata.append('description', data.description);
     formdata.append('price', data.price);

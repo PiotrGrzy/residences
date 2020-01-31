@@ -24,7 +24,7 @@ class APIFeatures {
       this.query = this.query.sort(this.queryString.sort);
     } else {
       // else sort from newest
-      this.query = this.query.sort('date');
+      this.query = this.query.sort('-date');
     }
     return this;
   }

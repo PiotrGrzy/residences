@@ -51,6 +51,7 @@
   &__location {
     margin: 0 auto;
     font-size: 1.8rem;
+    text-transform: capitalize;
   }
 
   &__grid {
@@ -64,7 +65,7 @@
   &__rooms,
   &__area,
   &__floor,
-  &__build {
+  &__built {
     text-transform: uppercase;
     font-weight: 400;
     font-size: 1.6rem;

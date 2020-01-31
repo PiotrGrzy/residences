@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
@@ -47,6 +47,7 @@ const AddHome = props => {
         ...data,
         owner: { ...props.user }
       };
+
       props.addHome(newHomeData);
       reset(defaultValues);
     } else {
@@ -70,11 +71,11 @@ const AddHome = props => {
             className="addhome__input"
             id="title"
             name="title"
-            ref={register({ required: true, minLength: 6 })}
+            ref={register({ required: true, minLength: 6, maxLength: 60 })}
           />
           {errors.name && (
             <span className="form-error-info">
-              Title is required, it must be at least 6chars long.
+              Title is required, it must be 6-60 characters long.
             </span>
           )}
         </div>
@@ -94,10 +95,12 @@ const AddHome = props => {
             className="addhome__input"
             id="country"
             name="country"
-            ref={register({ required: true })}
+            ref={register({ required: true, maxLength: 20 })}
           />
           {errors.country && (
-            <span className="form-error-info">Country is required</span>
+            <span className="form-error-info">
+              Country is required, maximum 20 characters long
+            </span>
           )}
         </div>
 
@@ -110,10 +113,12 @@ const AddHome = props => {
             className="addhome__input"
             id="city"
             name="city"
-            ref={register({ required: true })}
+            ref={register({ required: true, maxLength: 20 })}
           />
           {errors.city && (
-            <span className="form-error-info">City is required</span>
+            <span className="form-error-info">
+              City is required, maximum 20 characters long
+            </span>
           )}
         </div>
 
@@ -234,16 +239,24 @@ const AddHome = props => {
         </div>
 
         <label htmlFor="images" className="addhome__label">
-          Add some residence photos:
+          Add some residence photos(max 8):
         </label>
-        <input
-          className="addhome__input"
-          type="file"
-          name="images"
-          id="images"
-          multiple
-          ref={register}
-        />
+        <div className="input-wrapper">
+          <input
+            className="addhome__input"
+            type="file"
+            accept="image/*"
+            name="images"
+            id="images"
+            multiple
+            ref={register({ maxLength: 8 })}
+          />
+          {errors.images && (
+            <span className="form-error-info">
+              You can upload maximum of 8 images
+            </span>
+          )}
+        </div>
         <textarea
           name="description"
           id="description"
@@ -265,7 +278,6 @@ const AddHome = props => {
 const mapStateToProps = state => {
   return {
     user: state.user,
-
     loading: state.homes.loading
   };
 };

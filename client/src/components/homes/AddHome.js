@@ -262,7 +262,7 @@ const AddHome = props => {
           id="description"
           cols="30"
           rows="10"
-          placeholder="description"
+          placeholder="Description of your property..."
           className="addhome__description"
           ref={register}
         ></textarea>

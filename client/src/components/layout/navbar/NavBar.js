@@ -24,12 +24,20 @@ const NavBar = props => {
       return (
         <>
           <li className="navbar__list-item">
-            <Link to="/add" className="navbar__link navbar__link--add">
+            <Link
+              onClick={toggleMenu}
+              to="/add"
+              className="navbar__link navbar__link--add"
+            >
               Add residence
             </Link>
           </li>
           <li className="navbar__list-item">
-            <Link to="/usershomes" className="navbar__link navbar__link--login">
+            <Link
+              onClick={toggleMenu}
+              to="/usershomes"
+              className="navbar__link navbar__link--login"
+            >
               Your offers
             </Link>
           </li>
@@ -95,15 +103,15 @@ const NavBar = props => {
       </ul>
       <button
         onClick={toggleMenu}
-        class={
+        className={
           btn === 'opened'
             ? 'navbar__menu-toggler navbar__menu-toggler_open'
             : 'navbar__menu-toggler'
         }
         aria-expanded="false"
       >
-        <span class="navbar__label">Open/close menu</span>
-        <span class="navbar__burger"></span>
+        <span className="navbar__label">Open/close menu</span>
+        <span className="navbar__burger"></span>
       </button>
     </nav>
   );

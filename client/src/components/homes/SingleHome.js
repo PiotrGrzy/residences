@@ -44,7 +44,7 @@ const SingleHome = props => {
 
     return (
       <div className="single">
-        <ImageGallery items={galleryItems} />
+        <ImageGallery items={galleryItems} showFullscreenButton={false} />
         <div className="single__details">
           <h2 className="single__title">{title}</h2>
           <p className="single__price">{priceDisplay} PLN</p>

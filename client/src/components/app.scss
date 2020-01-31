@@ -24,9 +24,6 @@ html {
 .main {
   min-height: 98vh;
   padding-top: 8rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .input-wrapper {
@@ -41,4 +38,7 @@ html {
   position: absolute;
   bottom: -1rem;
   left: 0;
+  @include small {
+    bottom: -2rem;
+  }
 }

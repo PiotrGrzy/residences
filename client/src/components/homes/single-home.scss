@@ -6,6 +6,9 @@
   margin: 2rem auto;
   border-radius: 10px;
   box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.2);
+  @include small {
+    width: 95vw;
+  }
 
   &__details {
     margin-top: 2rem;

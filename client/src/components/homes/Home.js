@@ -4,7 +4,7 @@ import './home.scss';
 import numeral from 'numeral';
 
 const Home = ({
-  home: { _id, images, title, rooms, area, price, location, date, build, floor }
+  home: { _id, images, title, rooms, area, price, location, date, built, floor }
 }) => {
   const dateDisplay = date.slice(0, 10);
   const priceDisplay = numeral(price)
@@ -40,8 +40,8 @@ const Home = ({
             <p className="home__floor">
               <span>Floor: </span> {floor}
             </p>
-            <p className="home__build">
-              <span>Build in: </span> {build}
+            <p className="home__built">
+              <span>Built in: </span> {built}
             </p>
           </div>
           <p className="home__date">

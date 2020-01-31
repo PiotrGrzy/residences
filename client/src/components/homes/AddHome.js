@@ -18,7 +18,7 @@ const AddHome = props => {
     floor: '',
     price: '',
     description: '',
-    build: ''
+    built: ''
   };
 
   if (props.current) {
@@ -32,7 +32,7 @@ const AddHome = props => {
       floor: props.current.floor,
       price: props.current.price,
       description: props.current.description,
-      build: props.current.build
+      built: props.current.built
     };
   }
 
@@ -191,23 +191,23 @@ const AddHome = props => {
           )}
         </div>
 
-        <label htmlFor="build" className="addhome__label">
-          Build:
+        <label htmlFor="built" className="addhome__label">
+          built:
         </label>
         <div className="input-wrapper">
           <input
             type="text"
             className="addhome__input"
-            id="build"
-            name="build"
+            id="built"
+            name="built"
             ref={register({
               required: true,
               pattern: /^\d+$/
             })}
           />
-          {errors.build && (
+          {errors.built && (
             <span className="form-error-info">
-              build of the residence is required
+              built of the residence is required
             </span>
           )}
         </div>

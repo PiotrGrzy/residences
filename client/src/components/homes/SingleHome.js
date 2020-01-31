@@ -22,7 +22,7 @@ const SingleHome = props => {
       price,
       location,
       date,
-      build,
+      built,
       floor,
       owner,
       description
@@ -56,8 +56,8 @@ const SingleHome = props => {
             <p className="single__rooms">
               <i className="lni-home"></i> Rooms: {rooms}
             </p>
-            <p className="single__build">
-              <i className="lni-brick"></i> Build in: {build}
+            <p className="single__built">
+              <i className="lni-brick"></i> Built in: {built}
             </p>
             <p className="single__floor">
               <i className="lni-layers"></i> Floor: {floor}

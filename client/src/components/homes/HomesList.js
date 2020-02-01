@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { fetchHomes } from '../../actions';
+import { fetchHomes } from '../../actions/homeActions';
 
 import Home from './Home';
 

@@ -15,7 +15,8 @@ import HomesList from './homes/HomesList';
 import SingleHome from './homes/SingleHome';
 import AddHome from './homes/AddHome';
 import UsersHomes from './user/UsersHomes';
-import { getUser, fetchHomes } from '../actions';
+import { getUser } from '../actions/userActions';
+import { fetchHomes } from '../actions/homeActions';
 
 import './app.scss';
 export const history = createBrowserHistory();

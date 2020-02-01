@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { registerUser } from '../../actions';
+import { registerUser } from '../../actions/userActions';
 import { useForm } from 'react-hook-form';
 import './register.scss';
 

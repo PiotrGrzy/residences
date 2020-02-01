@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import ImageGallery from 'react-image-gallery';
 import numeral from 'numeral';
 import { connect } from 'react-redux';
-import { fetchSingleHome, deleteHome } from '../../actions';
+import { fetchSingleHome, deleteHome } from '../../actions/homeActions';
 
 import './single-home.scss';
 import './image-gallery.scss';

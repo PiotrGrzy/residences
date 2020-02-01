@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { setQuery } from '../../actions';
+import { setQuery } from '../../actions/homeActions';
 import './homes-filters.scss';
 
 const HomesFilters = props => {
@@ -32,7 +32,7 @@ const HomesFilters = props => {
 
     let query = '?';
     for (const item in queryObj) {
-      console.log(queryObj[item]);
+      // console.log(queryObj[item]);
       if (queryObj[item]) query += queryObj[item] + '&';
     }
     //  console.log(query);

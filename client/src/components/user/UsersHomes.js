@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { setQuery } from '../../actions';
+import { setQuery } from '../../actions/homeActions';
 
 import HomesList from '../homes/HomesList';
 

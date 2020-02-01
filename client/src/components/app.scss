@@ -21,6 +21,21 @@ html {
   }
 }
 
+button,
+input,
+a {
+  outline: none;
+  transition: all .2s;
+
+}
+
+button:focus,
+input:focus,
+a:focus {
+  // border: 1px solid $color-font-gold;
+  box-shadow: 0px 1px 10px 0px goldenrod;
+}
+
 .main {
   min-height: 98vh;
   padding-top: 8rem;
@@ -38,6 +53,7 @@ html {
   position: absolute;
   bottom: -1rem;
   left: 0;
+
   @include small {
     bottom: -2rem;
   }

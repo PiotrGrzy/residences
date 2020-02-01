@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
-import { addHome, setLoading } from '../../actions';
+import { addHome, setLoading } from '../../actions/homeActions';
 
 import './add-home.scss';
 import Loader from '../utils/Loader';
@@ -41,6 +41,10 @@ const AddHome = props => {
   });
 
   const onSubmit = data => {
+    if (data.images && data.images.length > 8) {
+      return alert('You can upload maximum of 8 photographs');
+    }
+    console.log(data.images.length);
     if (props.user.isSignedIn) {
       props.setLoading();
       const newHomeData = {
@@ -249,7 +253,7 @@ const AddHome = props => {
             name="images"
             id="images"
             multiple
-            ref={register({ maxLength: 8 })}
+            ref={register}
           />
           {errors.images && (
             <span className="form-error-info">

@@ -13,7 +13,7 @@ const SingleHome = props => {
     // eslint-disable-next-line
   }, []);
 
-  if (props.current.title) {
+  if (props.current) {
     const {
       _id,
       images,

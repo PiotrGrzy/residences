@@ -1,8 +1,8 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+//import { useForm } from 'react-hook-form';
 
 const FormField = ({ name, error, validation }) => {
-  const { register, errors } = useForm();
+  //const { register, errors } = useForm();
   return (
     <>
       <label htmlFor={name} className="addhome__label">

@@ -10,7 +10,7 @@ import {
 
 const initialState = {
   list: [],
-  currentHome: {},
+  currentHome: null,
   currentQuery: '?sort=-date&',
   loading: false
 };

@@ -145,6 +145,6 @@ export const deleteHome = id => async dispatch => {
   }
 };
 
-export const updateHome = id => async dispatch => {
-  console.log(id);
+export const updateHome = data => async dispatch => {
+  console.log(data);
 };

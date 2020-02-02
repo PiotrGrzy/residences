@@ -44,14 +44,13 @@ const AddHome = props => {
     if (data.images && data.images.length > 8) {
       return alert('You can upload maximum of 8 photographs');
     }
-    console.log(data.images.length);
     if (props.user.isSignedIn) {
       props.setLoading();
+      //ADD USERS DATA TO NEW OFFER
       const newHomeData = {
         ...data,
         owner: { ...props.user }
       };
-
       props.addHome(newHomeData);
       reset(defaultValues);
     } else {
@@ -282,7 +281,8 @@ const AddHome = props => {
 const mapStateToProps = state => {
   return {
     user: state.user,
-    loading: state.homes.loading
+    loading: state.homes.loading,
+    current: state.homes.currentHome
   };
 };
 

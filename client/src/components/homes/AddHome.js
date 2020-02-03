@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
-
-import { addHome, setLoading } from '../../actions/homeActions';
+import {
+  addHome,
+  setLoading,
+  clearCurrent,
+  updateHome
+} from '../../actions/homeActions';
+import Loader from '../utils/Loader';
 
 import './add-home.scss';
-import Loader from '../utils/Loader';
 
 const AddHome = props => {
   let defaultValues = {
@@ -21,29 +25,36 @@ const AddHome = props => {
     built: ''
   };
 
-  if (props.current) {
-    defaultValues = {
-      title: props.current.title,
-      country: props.current.location.country,
-      city: props.current.location.city,
-      street: props.current.location.street,
-      rooms: props.current.rooms,
-      area: props.current.area,
-      floor: props.current.floor,
-      price: props.current.price,
-      description: props.current.description,
-      built: props.current.built
-    };
-  }
-
   const { register, handleSubmit, errors, reset } = useForm({
     defaultValues
   });
+
+  // HELPER FUNCTION GENERATING INPUT WITH VALIDATION
+  const createFormField = (name, error, validation) => {
+    return (
+      <>
+        <label htmlFor={name} className="addhome__label">
+          {name}
+        </label>
+        <div className="input-wrapper">
+          <input
+            type="text"
+            className="addhome__input"
+            id={name}
+            name={name}
+            ref={register(validation)}
+          />
+          {errors[name] && <span className="form-error-info">{error}</span>}
+        </div>
+      </>
+    );
+  };
 
   const onSubmit = data => {
     if (data.images && data.images.length > 8) {
       return alert('You can upload maximum of 8 photographs');
     }
+
     if (props.user.isSignedIn) {
       props.setLoading();
       //ADD USERS DATA TO NEW OFFER
@@ -65,181 +76,49 @@ const AddHome = props => {
   return (
     <div className="addhome">
       <form className="addhome__form" onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="title" className="addhome__label">
-          Name:
-        </label>
-        <div className="input-wrapper">
-          <input
-            type="text"
-            className="addhome__input"
-            id="title"
-            name="title"
-            ref={register({ required: true, minLength: 6, maxLength: 60 })}
-          />
-          {errors.name && (
-            <span className="form-error-info">
-              Title is required, it must be 6-60 characters long.
-            </span>
-          )}
-        </div>
+        {createFormField(
+          'title',
+          'Title is required, it must be 6-60 characters long.',
+          { required: true, maxLength: 60, minLength: 6 }
+        )}
 
-        {/* <FormField
-          name="title"
-          error="Title is required, it must be at least 6chars long."
-          validation={{ required: true, minLength: 6 }}
-        /> */}
+        {createFormField(
+          'country',
+          'Country is required, maximum 20 characters long',
+          { required: true, maxLength: 20 }
+        )}
 
-        <label htmlFor="country" className="addhome__label">
-          Country:
-        </label>
-        <div className="input-wrapper">
-          <input
-            type="text"
-            className="addhome__input"
-            id="country"
-            name="country"
-            ref={register({ required: true, maxLength: 20 })}
-          />
-          {errors.country && (
-            <span className="form-error-info">
-              Country is required, maximum 20 characters long
-            </span>
-          )}
-        </div>
+        {createFormField(
+          'city',
+          'City is required, maximum 20 characters long',
+          { required: true, maxLength: 20 }
+        )}
 
-        <label htmlFor="city" className="addhome__label">
-          City:
-        </label>
-        <div className="input-wrapper">
-          <input
-            type="text"
-            className="addhome__input"
-            id="city"
-            name="city"
-            ref={register({ required: true, maxLength: 20 })}
-          />
-          {errors.city && (
-            <span className="form-error-info">
-              City is required, maximum 20 characters long
-            </span>
-          )}
-        </div>
+        {createFormField('street', '', {})}
+        {createFormField('rooms', 'Number of rooms is required', {
+          required: true,
+          pattern: /^([0-9]|[1-9][0-9]|100)$/ // ACCEPTS ONLY INTEGER 0-100
+        })}
 
-        <label htmlFor="street" className="addhome__label">
-          Street:
-        </label>
-        <div className="input-wrapper">
-          <input
-            type="text"
-            className="addhome__input"
-            id="street"
-            name="street"
-            ref={register}
-          />
-        </div>
+        {createFormField('area', 'Area of the residence is required', {
+          required: true,
+          pattern: /^\d+$/ // ACCEPTS ONLY INTEGER
+        })}
 
-        <label htmlFor="rooms" className="addhome__label">
-          Rooms:
-        </label>
-        <div className="input-wrapper">
-          <input
-            type="text"
-            className="addhome__input"
-            id="rooms"
-            name="rooms"
-            ref={register({
-              required: true,
-              pattern: /^([0-9]|[1-9][0-9]|100)$/
-            })}
-          />
-          {errors.rooms && (
-            <span className="form-error-info">Number of rooms is required</span>
-          )}
-        </div>
+        {createFormField('floor', 'Floor of the residence is required', {
+          required: true,
+          pattern: /^([0-9]|[1-9][0-9]|100)$/ // ACCEPTS ONLY INTEGER 0-100
+        })}
 
-        <label htmlFor="area" className="addhome__label">
-          Area:
-        </label>
-        <div className="input-wrapper">
-          <input
-            type="text"
-            className="addhome__input"
-            id="area"
-            name="area"
-            ref={register({
-              required: true,
-              pattern: /^\d+$/
-            })}
-          />
-          {errors.area && (
-            <span className="form-error-info">
-              Area of the residence is required
-            </span>
-          )}
-        </div>
+        {createFormField('built', 'Built date of the residence is required', {
+          required: true,
+          pattern: /^\d+$/ // ACCEPTS ONLY INTEGER
+        })}
 
-        <label htmlFor="floor" className="addhome__label">
-          floor:
-        </label>
-        <div className="input-wrapper">
-          <input
-            type="text"
-            className="addhome__input"
-            id="floor"
-            name="floor"
-            ref={register({
-              required: true,
-              pattern: /^\d+$/
-            })}
-          />
-          {errors.floor && (
-            <span className="form-error-info">
-              Floor of the residence is required
-            </span>
-          )}
-        </div>
-
-        <label htmlFor="built" className="addhome__label">
-          built:
-        </label>
-        <div className="input-wrapper">
-          <input
-            type="text"
-            className="addhome__input"
-            id="built"
-            name="built"
-            ref={register({
-              required: true,
-              pattern: /^\d+$/
-            })}
-          />
-          {errors.built && (
-            <span className="form-error-info">
-              built of the residence is required
-            </span>
-          )}
-        </div>
-
-        <label htmlFor="price" className="addhome__label">
-          Price:
-        </label>
-        <div className="input-wrapper">
-          <input
-            type="text"
-            className="addhome__input"
-            id="price"
-            name="price"
-            ref={register({
-              required: true,
-              pattern: /^\d+$/
-            })}
-          />
-          {errors.price && (
-            <span className="form-error-info">
-              Price of the residence is required
-            </span>
-          )}
-        </div>
+        {createFormField('price', ' Price of the residence is required', {
+          required: true,
+          pattern: /^\d+$/ // ACCEPTS ONLY INTEGER
+        })}
 
         <label htmlFor="images" className="addhome__label">
           Add some residence photos(max 8):
@@ -269,7 +148,6 @@ const AddHome = props => {
           className="addhome__description"
           ref={register}
         ></textarea>
-
         <button className="addhome__btn" type="submit">
           Submit
         </button>
@@ -286,4 +164,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { addHome, setLoading })(AddHome);
+export default connect(mapStateToProps, {
+  addHome,
+  setLoading,
+  clearCurrent,
+  updateHome
+})(AddHome);

@@ -10,10 +10,12 @@ import {
   FETCH_HOMES,
   FETCH_SINGLE,
   ADD_HOME,
+  CLEAR_CURRENT,
   SET_QUERY,
   DELETE_HOME,
   SET_LOADING,
-  ACTION_FAILED
+  ACTION_FAILED,
+  UPDATE_HOME
 } from './types';
 
 const notification = (type, message, title, position = 'top-left') => {
@@ -42,6 +44,12 @@ export const setQuery = query => {
 export const setLoading = () => {
   return {
     type: SET_LOADING
+  };
+};
+
+export const clearCurrent = () => {
+  return {
+    type: CLEAR_CURRENT
   };
 };
 
@@ -145,6 +153,30 @@ export const deleteHome = id => async dispatch => {
   }
 };
 
-export const updateHome = data => async dispatch => {
+export const updateHome = (data, id) => async dispatch => {
   console.log(data);
+  const token = Cookies.get('token');
+  try {
+    const response = await axios({
+      method: 'patch',
+      url: `http://localhost:5000/api/homes/${id}`,
+      data: data,
+      headers: {
+        'x-auth-token': token,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    dispatch({ type: UPDATE_HOME, payload: response.data });
+    history.push('/usershomes');
+    notification('success', 'Your offer has been updated!', `Success`);
+  } catch (err) {
+    console.log(err);
+    dispatch({ type: ACTION_FAILED });
+    notification(
+      'warning',
+      'Something went wrong, the offer wasnt updated to database',
+      `We are sorry`
+    );
+  }
 };

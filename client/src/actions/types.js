@@ -3,6 +3,7 @@ export const FETCH_SINGLE = 'FETCH_SINGLE';
 export const ADD_HOME = 'ADD_HOME';
 export const DELETE_HOME = 'DELETE_HOME';
 export const UPDATE_HOME = 'UPDATE_HOME';
+export const CLEAR_CURRENT = 'CLEAR_CURRENT';
 export const LOGIN_USER = 'LOGIN_USER';
 export const REGISTER_USER = 'REGISTER_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';

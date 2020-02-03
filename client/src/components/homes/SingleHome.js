@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import ImageGallery from 'react-image-gallery';
+import { Link } from 'react-router-dom';
 import numeral from 'numeral';
 import { connect } from 'react-redux';
 import { fetchSingleHome, deleteHome } from '../../actions/homeActions';
@@ -107,9 +108,9 @@ const SingleHome = props => {
               >
                 Delete
               </button>
-              <button className="single__btn single__btn--update">
+              <Link to='/update' className="single__btn single__btn--update">
                 Update
-              </button>
+              </Link>
             </>
           )}
 

@@ -26,6 +26,10 @@
     color: $color-font-gold;
   }
 
+  &__label {
+    text-transform: capitalize;
+  }
+
   &__input {
     border: none;
     border-bottom: 1px solid $color-font-gold;

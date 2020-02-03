@@ -2,10 +2,12 @@ import {
   FETCH_HOMES,
   FETCH_SINGLE,
   ADD_HOME,
+  CLEAR_CURRENT,
   SET_QUERY,
   DELETE_HOME,
   SET_LOADING,
-  ACTION_FAILED
+  ACTION_FAILED,
+  UPDATE_HOME
 } from '../actions/types';
 
 const initialState = {
@@ -28,6 +30,12 @@ export default (state = initialState, action) => {
         loading: false
       };
     }
+    case CLEAR_CURRENT: {
+      return {
+        ...state,
+        currentHome: null
+      };
+    }
     case FETCH_HOMES: {
       return {
         ...state,
@@ -46,6 +54,17 @@ export default (state = initialState, action) => {
       return {
         ...state,
         list: [...state.list, action.payload],
+        loading: false
+      };
+    }
+    case UPDATE_HOME: {
+      console.log(action.payload);
+      return {
+        ...state,
+        currentHome: action.payload,
+        list: state.list.map(home =>
+          home._id === action.payload.id ? action.payload : home
+        ),
         loading: false
       };
     }

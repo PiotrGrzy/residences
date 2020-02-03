@@ -14,6 +14,7 @@ import Register from './user/Register';
 import HomesList from './homes/HomesList';
 import SingleHome from './homes/SingleHome';
 import AddHome from './homes/AddHome';
+import UpdateHome from './homes/UpdateHome';
 import UsersHomes from './user/UsersHomes';
 import { getUser } from '../actions/userActions';
 import { fetchHomes } from '../actions/homeActions';
@@ -45,6 +46,7 @@ const App = props => {
           <Route path="/homes/:id" exact component={SingleHome} />
           <Route path="/usershomes" exact component={UsersHomes} />
           <Route path="/add" exact component={AddHome} />
+          <Route path="/update" exact component={UpdateHome} />
         </main>
         <Footer />
       </div>

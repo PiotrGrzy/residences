@@ -58,7 +58,6 @@ export default (state = initialState, action) => {
       };
     }
     case UPDATE_HOME: {
-      console.log(action.payload);
       return {
         ...state,
         currentHome: action.payload,

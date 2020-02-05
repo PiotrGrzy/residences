@@ -33,7 +33,7 @@ export const getUser = () => async dispatch => {
           'x-auth-token': token
         }
       });
-      console.log(response.data);
+
       dispatch({ type: SET_USER, payload: response.data });
       notification(
         'success',

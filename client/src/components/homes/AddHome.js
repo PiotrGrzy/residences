@@ -1,12 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import {
-  addHome,
-  setLoading,
-  clearCurrent,
-  updateHome
-} from '../../actions/homeActions';
+import { addHome, setLoading } from '../../actions/homeActions';
 import Loader from '../utils/Loader';
 
 import './add-home.scss';
@@ -57,6 +52,7 @@ const AddHome = props => {
 
     if (props.user.isSignedIn) {
       props.setLoading();
+
       //ADD USERS DATA TO NEW OFFER
       const newHomeData = {
         ...data,
@@ -166,7 +162,5 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   addHome,
-  setLoading,
-  clearCurrent,
-  updateHome
+  setLoading
 })(AddHome);

@@ -5,14 +5,12 @@ const jwt = require('jsonwebtoken');
 const { check, validationResult } = require('express-validator');
 
 const User = require('../models/User');
-const auth = require('../middleware/checkToken');
+const decodeToken = require('../middleware/checkToken');
 
-// Get logged in user data
+// Decode and check token and send user data back
 
-router.get('/', auth, async (req, res) => {
+router.get('/', decodeToken, async (req, res) => {
   try {
-    // const user = await User.findById(req.user.id).select('-password');
-    // console.log(user);
     res.json(req.user);
   } catch (err) {
     console.log(err.message);
@@ -20,7 +18,8 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-// Register new User
+// Login user
+
 router.post(
   '/',
   [

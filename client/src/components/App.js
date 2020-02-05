@@ -16,22 +16,28 @@ import SingleHome from './homes/SingleHome';
 import AddHome from './homes/AddHome';
 import UpdateHome from './homes/UpdateHome';
 import UsersHomes from './user/UsersHomes';
+import Loader from './utils/Loader';
 import { getUser } from '../actions/userActions';
-import { fetchHomes } from '../actions/homeActions';
+import { fetchHomes, setLoading } from '../actions/homeActions';
 
 import './app.scss';
 export const history = createBrowserHistory();
 
 const App = props => {
   useEffect(() => {
+    props.fetchHomes(props.query);
+    // eslint-disable-next-line
+  }, [props.query]);
+
+  useEffect(() => {
     props.getUser();
 
     // eslint-disable-next-line
   }, []);
-  useEffect(() => {
-    props.fetchHomes(props.query);
-    // eslint-disable-next-line
-  }, [props.query]);
+
+  if (props.loading) {
+    return <Loader />;
+  }
 
   return (
     <Router history={history}>
@@ -56,8 +62,11 @@ const App = props => {
 
 const mapStateToProps = state => {
   return {
-    query: state.homes.currentQuery
+    query: state.homes.currentQuery,
+    loading: state.homes.loading
   };
 };
 
-export default connect(mapStateToProps, { getUser, fetchHomes })(App);
+export default connect(mapStateToProps, { getUser, fetchHomes, setLoading })(
+  App
+);

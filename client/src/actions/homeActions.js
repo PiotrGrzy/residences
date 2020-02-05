@@ -1,7 +1,6 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { history } from '../components/App';
-
 import { store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import 'animate.css';
@@ -54,7 +53,6 @@ export const clearCurrent = () => {
 };
 
 export const fetchHomes = (query = '') => async dispatch => {
-  console.log(query);
   try {
     const response = await axios.get(
       `http://localhost:5000/api/homes/${query}`
@@ -103,7 +101,6 @@ export const addHome = data => async dispatch => {
     formdata.append('owner[name]', data.owner.name);
     formdata.append('owner[phone]', data.owner.phone);
     formdata.append('owner[email]', data.owner.email);
-    console.log(data.images);
 
     [...data.images].forEach(image => formdata.append('images', image));
     const token = Cookies.get('token');
@@ -154,7 +151,6 @@ export const deleteHome = id => async dispatch => {
 };
 
 export const updateHome = (data, id) => async dispatch => {
-  console.log(data);
   const token = Cookies.get('token');
   try {
     const response = await axios({

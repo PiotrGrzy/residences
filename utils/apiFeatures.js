@@ -18,7 +18,6 @@ class APIFeatures {
   }
 
   sort() {
-    console.log(this.queryString.sort);
     if (this.queryString.sort) {
       // If there is a sort query, sort by it
       this.query = this.query.sort(this.queryString.sort);

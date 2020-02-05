@@ -28,9 +28,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    // console.log(req.params.id);
     const home = await Home.findById(req.params.id);
-    //  console.log(home);
     res.status(200).json(home);
   } catch (err) {
     console.log(err);
@@ -57,9 +55,6 @@ router.post(
       .isEmpty(),
     check('description', 'Please enter description')
       .not()
-      .isEmpty(),
-    check('location', 'Please enter location')
-      .not()
       .isEmpty()
   ],
   async (req, res) => {
@@ -69,11 +64,11 @@ router.post(
       const imagesUpload = upload.array('images', 8);
       let home = '';
       await imagesUpload(req, res, async function(err) {
-        //console.log(req.body);
-        // const errors = validationResult(req);
-        // if (!errors.isEmpty()) {
-        //   return res.status(400).json(errors.array());
-        // }
+        console.log(req.body);
+        const errors = validationResult(req.body);
+        if (!errors.isEmpty()) {
+          return res.status(400).json(errors.array());
+        }
 
         const imagesUrls = req.files.map(image => image.location);
 
@@ -103,7 +98,7 @@ router.post(
           date
         });
         home.images = [...imagesUrls];
-        //console.log(home);
+
         await home.save();
         res.status(200).json(home);
       });

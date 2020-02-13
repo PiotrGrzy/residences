@@ -2,27 +2,9 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { history } from '../components/App';
 
-import { store } from 'react-notifications-component';
-import 'react-notifications-component/dist/theme.css';
-import 'animate.css';
+import notification from '../components/utils/Notification';
 
 import { LOGIN_USER, REGISTER_USER, LOGOUT_USER, SET_USER } from './types';
-
-const notification = (type, message, title, position = 'top-left') => {
-  return store.addNotification({
-    title: title,
-    message: message,
-    type: type,
-    insert: 'top',
-    container: position,
-    animationIn: ['animated', 'fadeIn'],
-    animationOut: ['animated', 'fadeOut'],
-    dismiss: {
-      duration: 5000,
-      onScreen: true
-    }
-  });
-};
 
 export const getUser = () => async dispatch => {
   const token = Cookies.get('token');

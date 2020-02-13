@@ -16,7 +16,7 @@ import './image-gallery.scss';
 
 const SingleHome = props => {
   useEffect(() => {
-    props.setLoading();
+    //props.setLoading();
     props.fetchSingleHome(props.match.params.id);
     // eslint-disable-next-line
   }, []);
@@ -50,9 +50,9 @@ const SingleHome = props => {
       return item;
     });
 
-    if (props.loading) {
-      return <Loader />;
-    }
+    // if (props.loading) {
+    //   return <Loader />;
+    // }
 
     return (
       <div className="single">
@@ -137,7 +137,7 @@ const SingleHome = props => {
 const mapStateToProps = state => {
   return {
     current: state.homes.currentHome,
-    loading: state.homes.loading,
+    // loading: state.homes.loading,
     currentUserId: state.user.id
   };
 };

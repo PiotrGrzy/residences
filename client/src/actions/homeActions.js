@@ -37,9 +37,7 @@ export const clearCurrent = () => {
 
 export const fetchHomes = (query = '') => async dispatch => {
   try {
-    const response = await axios.get(
-      `http://localhost:5000/api/homes/${query}`
-    );
+    const response = await axios.get(`/api/homes/${query}`);
 
     dispatch({ type: FETCH_HOMES, payload: response.data });
   } catch (err) {
@@ -54,7 +52,7 @@ export const fetchHomes = (query = '') => async dispatch => {
 
 export const fetchSingleHome = id => async dispatch => {
   try {
-    const response = await axios.get(`http://localhost:5000/api/homes/${id}`);
+    const response = await axios.get(`/api/homes/${id}`);
 
     dispatch({ type: FETCH_SINGLE, payload: response.data });
   } catch (err) {
@@ -90,7 +88,7 @@ export const addHome = data => async dispatch => {
 
     const response = await axios({
       method: 'post',
-      url: 'http://localhost:5000/api/homes',
+      url: '/api/homes',
       data: formdata,
       headers: {
         'x-auth-token': token,
@@ -115,7 +113,7 @@ export const addHome = data => async dispatch => {
 export const deleteHome = id => async dispatch => {
   const token = Cookies.get('token');
   try {
-    await axios.delete(`http://localhost:5000/api/homes/${id}`, {
+    await axios.delete(`/api/homes/${id}`, {
       headers: {
         'x-auth-token': token
       }
@@ -138,7 +136,7 @@ export const updateHome = (data, id) => async dispatch => {
   try {
     const response = await axios({
       method: 'patch',
-      url: `http://localhost:5000/api/homes/${id}`,
+      url: `/api/homes/${id}`,
       data: data,
       headers: {
         'x-auth-token': token,

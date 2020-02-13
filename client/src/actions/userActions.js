@@ -10,7 +10,7 @@ export const getUser = () => async dispatch => {
   const token = Cookies.get('token');
   if (token) {
     try {
-      const response = await axios.get('http://localhost:5000/api/auth', {
+      const response = await axios.get('/api/auth', {
         headers: {
           'x-auth-token': token
         }
@@ -32,7 +32,7 @@ export const loginUser = formData => async dispatch => {
   try {
     const response = await axios({
       method: 'post',
-      url: 'http://localhost:5000/api/auth',
+      url: '/api/auth',
       data: JSON.stringify(formData),
       headers: { 'Content-Type': 'application/json' }
     });
@@ -60,7 +60,7 @@ export const registerUser = formData => async dispatch => {
   try {
     const response = await axios({
       method: 'post',
-      url: 'http://localhost:5000/api/users',
+      url: '/api/users',
       data: JSON.stringify(formData),
       headers: { 'Content-Type': 'application/json' }
     });
